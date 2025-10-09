@@ -4,19 +4,52 @@ import { useEffect, useState } from 'react';
 import Navigation from './components/Navigation';
 import FloatingParticles from './components/FloatingParticles';
 import ParallaxCard from './components/ParallaxCard';
-import { useParallax, useMouseParallax } from './hooks/useParallax';
+import { useParallax } from './hooks/useParallax';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [revealedContacts, setRevealedContacts] = useState<Record<string, boolean>>({});
+  const [stars, setStars] = useState<Array<{ top: number; left: number; size: 'lg' | 'md' | 'sm'; duration: number; delay: number; opacity?: number }>>([]);
   const parallaxBg = useParallax(0.5);
   const parallaxMid = useParallax(0.3);
   const parallaxSlow = useParallax(0.15);
-  const mouseParallax = useMouseParallax(0.02);
 
   const handleRevealContact = (type: string) => {
     setRevealedContacts(prev => ({ ...prev, [type]: true }));
   };
+
+  useEffect(() => {
+    // Generate stars on client side only
+    const generatedStars = [
+      // Large stars
+      ...Array.from({ length: 20 }, () => ({
+        top: Math.random() * 100,
+        left: Math.random() * 100,
+        size: 'lg' as const,
+        duration: 2 + Math.random() * 3,
+        delay: Math.random() * 5,
+      })),
+      // Medium stars
+      ...Array.from({ length: 40 }, () => ({
+        top: Math.random() * 100,
+        left: Math.random() * 100,
+        size: 'md' as const,
+        duration: 1.5 + Math.random() * 2,
+        delay: Math.random() * 3,
+        opacity: 0.6 + Math.random() * 0.4,
+      })),
+      // Small stars
+      ...Array.from({ length: 60 }, () => ({
+        top: Math.random() * 100,
+        left: Math.random() * 100,
+        size: 'sm' as const,
+        duration: 0,
+        delay: 0,
+        opacity: 0.3 + Math.random() * 0.3,
+      })),
+    ];
+    setStars(generatedStars);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -47,23 +80,82 @@ export default function Home() {
           id="home"
           className="relative min-h-screen flex items-center justify-center overflow-hidden"
         >
-          {/* Subtle Gradient Background with Parallax */}
+          {/* Background Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
+
+          {/* Nebula/Galaxy Clouds with Parallax */}
           <div
-            className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black"
+            className="absolute inset-0 opacity-30"
             style={{ transform: `translateY(${parallaxBg}px)` }}
           >
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(65,105,225,0.05),transparent_50%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(65,105,225,0.03),transparent_50%)]" />
+            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.15),rgba(138,43,226,0.1),transparent_70%)] blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+            <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(138,43,226,0.12),rgba(65,105,225,0.08),transparent_70%)] blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+            <div className="absolute top-1/3 left-1/2 w-[400px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(79,70,229,0.1),transparent_60%)] blur-2xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
           </div>
 
-          {/* Geometric Pattern Overlay with Mouse Parallax */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              transform: `translate(${mouseParallax.x}px, ${mouseParallax.y}px)`,
-              transition: 'transform 0.3s ease-out'
-            }}
-          >
+          {/* Starfield Layers - Fixed (No Parallax) */}
+          <div className="absolute inset-0 opacity-40">
+            {stars.map((star, i) => (
+              <div
+                key={`star-${star.size}-${i}`}
+                className={`absolute bg-white rounded-full ${
+                  star.size === 'lg' ? 'w-1 h-1 animate-pulse' :
+                  star.size === 'md' ? 'w-0.5 h-0.5 animate-pulse' :
+                  'w-px h-px'
+                }`}
+                style={{
+                  top: `${star.top}%`,
+                  left: `${star.left}%`,
+                  ...(star.duration > 0 && {
+                    animationDuration: `${star.duration}s`,
+                    animationDelay: `${star.delay}s`,
+                  }),
+                  ...(star.opacity !== undefined && { opacity: star.opacity }),
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Shooting Stars - Fixed (No Parallax) */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(2)].map((_, i) => (
+              <div
+                key={`shooting-${i}`}
+                className="absolute w-1 h-1 bg-white rounded-full"
+                style={{
+                  top: `${Math.random() * 50}%`,
+                  left: `${-10 + Math.random() * 20}%`,
+                  animationName: 'shooting-star',
+                  animationDuration: `${6 + Math.random() * 4}s`,
+                  animationTimingFunction: 'ease-in',
+                  animationIterationCount: 'infinite',
+                  animationDelay: `${i * 15}s`,
+                  boxShadow: '0 0 4px 2px rgba(255,255,255,0.3)',
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Black Hole Effect */}
+          <div className="absolute top-1/4 right-[15%] w-64 h-64 hidden lg:block">
+            <div className="relative w-full h-full">
+              {/* Event Horizon */}
+              <div className="absolute inset-0 rounded-full bg-black border-2 border-[#4169E1]/30 animate-pulse" style={{ animationDuration: '3s' }} />
+
+              {/* Accretion Disk */}
+              <div className="absolute inset-0 rounded-full">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent blur-xl animate-spin" style={{ animationDuration: '20s' }} />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-[#8a2be2]/15 to-transparent blur-xl animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
+              </div>
+
+              {/* Gravitational Lensing Effect */}
+              <div className="absolute -inset-8 rounded-full border border-[#4169E1]/10 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.5s' }} />
+              <div className="absolute -inset-16 rounded-full border border-[#4169E1]/5 animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
+            </div>
+          </div>
+
+          {/* Subtle Geometric Pattern (no mouse parallax) */}
+          <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
               backgroundImage: `linear-gradient(rgba(65,105,225,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(65,105,225,0.1) 1px, transparent 1px)`,
               backgroundSize: '100px 100px'
@@ -107,7 +199,7 @@ export default function Home() {
           {/* Floating Depth Layers */}
           <div
             className="absolute inset-0 opacity-20 pointer-events-none"
-            style={{ transform: `translateY(${parallaxSlow * 0.8}px) translateX(${mouseParallax.x * 2}px)` }}
+            style={{ transform: `translateY(${parallaxSlow * 0.8}px)` }}
           >
             <div className="absolute top-20 left-10 w-32 h-32 bg-[#4169E1]/20 rounded-full blur-3xl" />
             <div className="absolute bottom-40 right-20 w-40 h-40 bg-[#5a7dee]/20 rounded-full blur-3xl" />

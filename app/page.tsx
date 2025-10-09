@@ -8,10 +8,15 @@ import { useParallax, useMouseParallax } from './hooks/useParallax';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
+  const [revealedContacts, setRevealedContacts] = useState<Record<string, boolean>>({});
   const parallaxBg = useParallax(0.5);
   const parallaxMid = useParallax(0.3);
   const parallaxSlow = useParallax(0.15);
   const mouseParallax = useMouseParallax(0.02);
+
+  const handleRevealContact = (type: string) => {
+    setRevealedContacts(prev => ({ ...prev, [type]: true }));
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -477,42 +482,69 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 mb-16">
             {[
               {
+                label: 'LinkedIn',
+                value: 'linkedin.com/in/htet-aung-linn',
+                href: 'https://www.linkedin.com/in/htet-aung-linn-51146923b/',
+                needsReveal: false,
+              },
+              {
                 label: 'Email',
-                value: 'htet@example.com',
-                href: 'mailto:htet@example.com',
+                value: 'htaunglin@gmail.com',
+                href: 'mailto:htaunglin@gmail.com',
+                needsReveal: true,
               },
               {
                 label: 'GitHub',
-                value: 'github.com/htetaunglinn',
-                href: 'https://github.com/htetaunglinn',
-              },
-              {
-                label: 'LinkedIn',
-                value: 'linkedin.com/in/htetaunglinn',
-                href: 'https://linkedin.com/in/htetaunglinn',
+                value: 'github.com/htetaunglinn-dev',
+                href: 'https://github.com/htetaunglinn-dev',
+                needsReveal: false,
               },
               {
                 label: 'Phone',
-                value: '+95 123 456 789',
-                href: 'tel:+95123456789',
+                value: '+66 620911336',
+                href: 'tel:+66620911336',
+                needsReveal: true,
               },
-            ].map((contact, index) => (
-              <a
-                key={index}
-                href={contact.href}
-                target={contact.label !== 'Email' && contact.label !== 'Phone' ? '_blank' : undefined}
-                rel={contact.label !== 'Email' && contact.label !== 'Phone' ? 'noopener noreferrer' : undefined}
-                className="group bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 flex items-center justify-between"
-              >
-                <div>
-                  <div className="text-sm text-gray-400 mb-2 uppercase tracking-wider">{contact.label}</div>
-                  <div className="text-white text-xl font-medium group-hover:text-[#4169E1] transition-colors">
-                    {contact.value}
+            ].map((contact, index) => {
+              const isRevealed = revealedContacts[contact.label];
+              const needsReveal = contact.needsReveal && !isRevealed;
+
+              if (needsReveal) {
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleRevealContact(contact.label)}
+                    className="group bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 flex items-center justify-between text-left"
+                  >
+                    <div>
+                      <div className="text-sm text-gray-400 mb-2 uppercase tracking-wider">{contact.label}</div>
+                      <div className="text-white text-xl font-medium group-hover:text-[#4169E1] transition-colors">
+                        Click to reveal {contact.label.toLowerCase()}
+                      </div>
+                    </div>
+                    <span className="text-[#4169E1] text-2xl">🔒</span>
+                  </button>
+                );
+              }
+
+              return (
+                <a
+                  key={index}
+                  href={contact.href}
+                  target={contact.label !== 'Email' && contact.label !== 'Phone' ? '_blank' : undefined}
+                  rel={contact.label !== 'Email' && contact.label !== 'Phone' ? 'noopener noreferrer' : undefined}
+                  className="group bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 flex items-center justify-between"
+                >
+                  <div>
+                    <div className="text-sm text-gray-400 mb-2 uppercase tracking-wider">{contact.label}</div>
+                    <div className="text-white text-xl font-medium group-hover:text-[#4169E1] transition-colors">
+                      {contact.value}
+                    </div>
                   </div>
-                </div>
-                <span className="text-[#4169E1] text-2xl group-hover:translate-x-2 transition-transform">→</span>
-              </a>
-            ))}
+                  <span className="text-[#4169E1] text-2xl group-hover:translate-x-2 transition-transform">→</span>
+                </a>
+              );
+            })}
           </div>
 
           <div className="relative bg-gradient-to-r from-[#4169E1]/10 to-[#4169E1]/5 backdrop-blur-sm border-2 border-[#4169E1]/20 rounded-3xl p-16 text-center overflow-hidden">
@@ -527,7 +559,7 @@ export default function Home() {
               </p>
               <div className="flex gap-6 justify-center flex-wrap">
                 <a
-                  href="mailto:htet@example.com"
+                  href="mailto:htaunglin@gmail.com"
                   className="group inline-flex items-center gap-3 px-10 py-5 bg-[#4169E1] hover:bg-[#3454b4] text-white rounded-xl transition-all duration-300 hover:scale-105 font-bold text-lg shadow-2xl shadow-[#4169E1]/20"
                 >
                   Send a Message
@@ -559,8 +591,8 @@ export default function Home() {
 
             <div className="flex gap-4">
               {[
-                { label: 'GitHub', href: 'https://github.com' },
-                { label: 'LinkedIn', href: 'https://linkedin.com' },
+                { label: 'GitHub', href: 'https://github.com/htetaunglinn-dev' },
+                { label: 'LinkedIn', href: 'https://www.linkedin.com/in/htet-aung-linn-51146923b/' },
                 { label: 'Twitter', href: 'https://twitter.com' },
               ].map((social) => (
                 <a

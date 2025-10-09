@@ -157,7 +157,7 @@ export default function Home() {
                 href="#contact"
                 className="px-10 py-4 bg-transparent hover:bg-white/5 text-white border-2 border-[#4169E1]/30 hover:border-[#4169E1] rounded-lg transition-all duration-300 hover:scale-105 font-semibold backdrop-blur-sm"
               >
-                Let's Connect
+                Let&apos;s Connect
               </a>
             </div>
 
@@ -186,7 +186,7 @@ export default function Home() {
           <div className="grid md:grid-cols-5 gap-16 items-start">
             <div className="md:col-span-3 space-y-6">
               <p className="text-gray-400 text-lg leading-relaxed">
-                I'm a passionate Full Stack Developer with over 4 years of experience crafting elegant digital
+                I&apos;m a passionate Full Stack Developer with over 4 years of experience crafting elegant digital
                 solutions. My journey in tech has been driven by a commitment to excellence and innovation.
               </p>
               <p className="text-gray-400 text-lg leading-relaxed">
@@ -471,15 +471,15 @@ export default function Home() {
       >
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-center text-white">
-            Let's Work Together
+            Let&apos;s Work Together
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#4169E1] to-transparent mx-auto mb-12" />
           <p className="text-xl text-gray-400 mb-20 text-center max-w-3xl mx-auto leading-relaxed">
-            I'm always excited to collaborate on innovative projects and connect with fellow tech enthusiasts.
-            Let's create something exceptional together.
+            I&apos;m always excited to collaborate on innovative projects and connect with fellow tech enthusiasts.
+            Let&apos;s create something exceptional together.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
+          <div className="grid md:grid-cols-2 gap-8 mb-16" suppressHydrationWarning>
             {[
               {
                 label: 'LinkedIn',
@@ -554,7 +554,7 @@ export default function Home() {
                 Have a Project in Mind?
               </h3>
               <p className="text-gray-400 mb-10 max-w-2xl mx-auto text-lg leading-relaxed">
-                Whether it's a complex web application or a simple landing page, I'm here to help bring your
+                Whether it&apos;s a complex web application or a simple landing page, I&apos;m here to help bring your
                 vision to life with clean code and elegant solutions.
               </p>
               <div className="flex gap-6 justify-center flex-wrap">

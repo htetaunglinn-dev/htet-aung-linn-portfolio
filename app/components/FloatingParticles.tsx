@@ -57,7 +57,7 @@ export default function FloatingParticles() {
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(59, 130, 246, ${particle.opacity})`;
+        ctx.fillStyle = `rgba(65, 105, 225, ${particle.opacity})`;
         ctx.fill();
       });
 
@@ -70,7 +70,7 @@ export default function FloatingParticles() {
 
           if (distance < 150) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(59, 130, 246, ${0.2 * (1 - distance / 150)})`;
+            ctx.strokeStyle = `rgba(65, 105, 225, ${0.15 * (1 - distance / 150)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);

@@ -56,7 +56,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <button
           onClick={() => scrollToSection('home')}
-          className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent hover:from-blue-300 hover:to-purple-300 transition-all"
+          className="text-xl font-bold bg-gradient-to-r from-[#4169E1] to-[#5a7dee] bg-clip-text text-transparent hover:from-[#5a7dee] hover:to-[#4169E1] transition-all"
         >
           Htet Aung Linn
         </button>
@@ -66,8 +66,8 @@ export default function Navigation() {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`text-sm font-medium transition-all hover:text-blue-400 ${
-                activeSection === item.id ? 'text-blue-400' : 'text-gray-300'
+              className={`text-sm font-medium transition-all hover:text-[#4169E1] ${
+                activeSection === item.id ? 'text-[#4169E1]' : 'text-gray-300'
               }`}
             >
               {item.label}
@@ -78,7 +78,7 @@ export default function Navigation() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => scrollToSection('contact')}
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-300 hover:scale-105 text-sm font-medium"
+            className="px-6 py-2 bg-[#4169E1] hover:bg-[#3454b4] text-white rounded-lg transition-all duration-300 hover:scale-105 text-sm font-semibold"
           >
             Get in Touch
           </button>

@@ -31,6 +31,31 @@ body {
   overflow-x: hidden;
 }
 
+/* Parallax Layer Performance */
+.parallax-layer {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Smooth parallax transitions */
+.parallax-smooth {
+  transition: transform 0.1s ease-out;
+}
+
+/* 3D Depth Effect */
+.depth-layer-1 {
+  transform: translateZ(100px);
+}
+
+.depth-layer-2 {
+  transform: translateZ(50px);
+}
+
+.depth-layer-3 {
+  transform: translateZ(25px);
+}
+
 h1,
 h2,
 h3 {

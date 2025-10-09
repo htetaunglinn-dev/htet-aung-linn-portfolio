@@ -3,9 +3,15 @@
 import { useEffect, useState } from 'react';
 import Navigation from './components/Navigation';
 import FloatingParticles from './components/FloatingParticles';
+import ParallaxCard from './components/ParallaxCard';
+import { useParallax, useMouseParallax } from './hooks/useParallax';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
+  const parallaxBg = useParallax(0.5);
+  const parallaxMid = useParallax(0.3);
+  const parallaxSlow = useParallax(0.15);
+  const mouseParallax = useMouseParallax(0.02);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,62 +42,105 @@ export default function Home() {
           id="home"
           className="relative min-h-screen flex items-center justify-center overflow-hidden"
         >
-          {/* Subtle Gradient Background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black">
+          {/* Subtle Gradient Background with Parallax */}
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black"
+            style={{ transform: `translateY(${parallaxBg}px)` }}
+          >
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(65,105,225,0.05),transparent_50%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(65,105,225,0.03),transparent_50%)]" />
           </div>
 
-          {/* Geometric Pattern Overlay */}
-          <div className="absolute inset-0 opacity-10">
+          {/* Geometric Pattern Overlay with Mouse Parallax */}
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              transform: `translate(${mouseParallax.x}px, ${mouseParallax.y}px)`,
+              transition: 'transform 0.3s ease-out'
+            }}
+          >
             <div className="absolute inset-0" style={{
               backgroundImage: `linear-gradient(rgba(65,105,225,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(65,105,225,0.1) 1px, transparent 1px)`,
               backgroundSize: '100px 100px'
             }} />
           </div>
 
-          {/* Floating Stats Cards - More Subtle */}
-          <div className="absolute top-1/4 left-[8%] z-20 animate-float hidden lg:block">
+          {/* Floating Stats Cards with Parallax */}
+          <div
+            className="absolute top-1/4 left-[8%] z-20 animate-float hidden lg:block"
+            style={{ transform: `translateY(${parallaxMid * -1}px)` }}
+          >
             <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
               <p className="text-4xl font-bold text-[#4169E1] mb-1">4+</p>
               <p className="text-xs text-gray-400 tracking-wide">Years Experience</p>
             </div>
           </div>
 
-          <div className="absolute bottom-1/4 right-[8%] z-20 animate-float-delayed hidden lg:block">
+          <div
+            className="absolute bottom-1/4 right-[8%] z-20 animate-float-delayed hidden lg:block"
+            style={{ transform: `translateY(${parallaxSlow * -1}px)` }}
+          >
             <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
               <p className="text-4xl font-bold text-[#4169E1] mb-1">50+</p>
               <p className="text-xs text-gray-400 tracking-wide">Projects Delivered</p>
             </div>
           </div>
 
-          <div className="absolute top-1/3 right-[12%] z-20 animate-float hidden lg:block" style={{ animationDelay: '0.5s' }}>
+          <div
+            className="absolute top-1/3 right-[12%] z-20 animate-float hidden lg:block"
+            style={{
+              animationDelay: '0.5s',
+              transform: `translateY(${parallaxMid * -0.7}px)`
+            }}
+          >
             <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
               <p className="text-4xl font-bold text-[#4169E1] mb-1">98%</p>
               <p className="text-xs text-gray-400 tracking-wide">Client Satisfaction</p>
             </div>
           </div>
 
+          {/* Floating Depth Layers */}
+          <div
+            className="absolute inset-0 opacity-20 pointer-events-none"
+            style={{ transform: `translateY(${parallaxSlow * 0.8}px) translateX(${mouseParallax.x * 2}px)` }}
+          >
+            <div className="absolute top-20 left-10 w-32 h-32 bg-[#4169E1]/20 rounded-full blur-3xl" />
+            <div className="absolute bottom-40 right-20 w-40 h-40 bg-[#5a7dee]/20 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-[#4169E1]/15 rounded-full blur-2xl" />
+          </div>
+
           {/* Content */}
           <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
-            <div className="mb-8">
+            <div
+              className="mb-8"
+              style={{ transform: `translateY(${parallaxSlow * -0.5}px)` }}
+            >
               <span className="inline-block px-4 py-2 bg-[#4169E1]/10 border border-[#4169E1]/20 rounded-full text-[#4169E1] text-sm font-medium mb-8">
                 Full Stack Developer
               </span>
             </div>
-            <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold mb-8 text-white leading-[1.15] tracking-tight">
+            <h1
+              className="text-5xl md:text-6xl lg:text-8xl font-bold mb-8 text-white leading-[1.15] tracking-tight"
+              style={{ transform: `translateY(${parallaxSlow * -0.3}px)` }}
+            >
               Crafting Digital
               <br />
               <span className="bg-gradient-to-r from-[#4169E1] via-[#5a7dee] to-[#4169E1] bg-clip-text text-transparent">
                 Excellence
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light">
+            <p
+              className="text-xl md:text-2xl text-gray-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light"
+              style={{ transform: `translateY(${parallaxSlow * -0.2}px)` }}
+            >
               Building exceptional web experiences with modern technologies,
               <br className="hidden md:block" />
               elegant architecture, and meticulous attention to detail
             </p>
-            <div className="flex gap-6 justify-center flex-wrap">
+            <div
+              className="flex gap-6 justify-center flex-wrap"
+              style={{ transform: `translateY(${parallaxSlow * -0.1}px)` }}
+            >
               <a
                 href="#projects"
                 className="group px-10 py-4 bg-[#4169E1] hover:bg-[#3454b4] text-white rounded-lg transition-all duration-300 hover:scale-105 font-semibold shadow-2xl shadow-[#4169E1]/20"
@@ -361,9 +410,10 @@ export default function Home() {
                 impact: '20K+ posts',
               },
             ].map((project, index) => (
-              <div
+              <ParallaxCard
                 key={index}
-                className="group relative bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 hover:-translate-y-2"
+                intensity={10}
+                className="group relative bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10"
               >
                 {/* Thumbnail Placeholder */}
                 <div className="w-full h-48 bg-gradient-to-br from-[#4169E1]/10 to-[#4169E1]/5 rounded-xl mb-6 flex items-center justify-center border border-[#4169E1]/10 group-hover:border-[#4169E1]/30 transition-colors">
@@ -401,7 +451,7 @@ export default function Home() {
                   View Project
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </a>
-              </div>
+              </ParallaxCard>
             ))}
           </div>
         </div>

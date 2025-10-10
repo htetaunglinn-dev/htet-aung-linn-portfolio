@@ -35,18 +35,16 @@ export default function WorkExperienceCard({
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, index * 150);
-
-    return () => clearTimeout(timer);
-  }, [index]);
+    // Set visible immediately on mount to avoid blank cards
+    setIsVisible(true);
+  }, []);
 
   return (
     <div
-      className={`relative transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
+      className="relative opacity-100 translate-y-0"
+      style={{
+        animation: `fadeInUp 0.7s ease-out ${index * 0.15}s both`
+      }}
     >
       {/* Content Grid */}
       <div className="grid md:grid-cols-3 gap-8">

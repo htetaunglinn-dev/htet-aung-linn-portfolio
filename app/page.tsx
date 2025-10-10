@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import FloatingParticles from './components/FloatingParticles';
 import ParallaxCard from './components/ParallaxCard';
 import WorkExperience from './components/WorkExperience';
+import TechStackCarousel from './components/TechStackCarousel';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
@@ -298,53 +299,7 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section
-        id="skills"
-        className={`py-40 px-6 bg-gradient-to-b from-black to-[#0a0a0a] relative transition-all duration-1000 ${
-          isVisible.skills ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-center text-white">
-            Technical Skills
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#4169E1] to-transparent mx-auto mb-20" />
-
-          <div className="grid md:grid-cols-3 gap-12">
-            {[
-              {
-                category: 'Frontend Development',
-                skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Redux', 'React Query'],
-              },
-              {
-                category: 'Backend Development',
-                skills: ['Node.js', 'Express', 'NestJS', 'PostgreSQL', 'MongoDB', 'GraphQL'],
-              },
-              {
-                category: 'DevOps & Cloud',
-                skills: ['Docker', 'AWS', 'Git', 'CI/CD', 'Nginx', 'Linux'],
-              },
-            ].map((group, index) => (
-              <div key={index} className="group">
-                <h3 className="text-2xl font-bold text-white mb-8 group-hover:text-[#4169E1] transition-colors">
-                  {group.category}
-                </h3>
-                <div className="space-y-4">
-                  {group.skills.map((skill, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-3 text-gray-400 hover:text-[#4169E1] transition-colors text-lg group/item"
-                    >
-                      <div className="w-1.5 h-1.5 bg-[#4169E1] rounded-full group-hover/item:w-3 transition-all" />
-                      {skill}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TechStackCarousel />
 
       {/* Experience Section */}
       <WorkExperience />

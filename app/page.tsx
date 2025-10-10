@@ -11,12 +11,16 @@ export default function Home() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [revealedContacts, setRevealedContacts] = useState<Record<string, boolean>>({});
   const [stars, setStars] = useState<Array<{ top: number; left: number; size: 'lg' | 'md' | 'sm'; duration: number; delay: number; opacity?: number }>>([]);
+  const [shootingStars, setShootingStars] = useState<Array<{ top: number; left: number; duration: number; delay: number }>>([]);
+  const [isMounted, setIsMounted] = useState(false);
 
   const handleRevealContact = (type: string) => {
     setRevealedContacts(prev => ({ ...prev, [type]: true }));
   };
 
   useEffect(() => {
+    setIsMounted(true);
+
     // Generate stars on client side only
     const generatedStars = [
       // Large stars
@@ -47,6 +51,15 @@ export default function Home() {
       })),
     ];
     setStars(generatedStars);
+
+    // Generate shooting stars
+    const generatedShootingStars = Array.from({ length: 2 }, (_, i) => ({
+      top: Math.random() * 50,
+      left: -10 + Math.random() * 20,
+      duration: 6 + Math.random() * 4,
+      delay: i * 15,
+    }));
+    setShootingStars(generatedShootingStars);
   }, []);
 
   useEffect(() => {
@@ -113,24 +126,26 @@ export default function Home() {
           </div>
 
           {/* Shooting Stars - Fixed (No Parallax) */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(2)].map((_, i) => (
-              <div
-                key={`shooting-${i}`}
-                className="absolute w-1 h-1 bg-white rounded-full"
-                style={{
-                  top: `${Math.random() * 50}%`,
-                  left: `${-10 + Math.random() * 20}%`,
-                  animationName: 'shooting-star',
-                  animationDuration: `${6 + Math.random() * 4}s`,
-                  animationTimingFunction: 'ease-in',
-                  animationIterationCount: 'infinite',
-                  animationDelay: `${i * 15}s`,
-                  boxShadow: '0 0 4px 2px rgba(255,255,255,0.3)',
-                }}
-              />
-            ))}
-          </div>
+          {isMounted && (
+            <div className="absolute inset-0 overflow-hidden">
+              {shootingStars.map((star, i) => (
+                <div
+                  key={`shooting-${i}`}
+                  className="absolute w-1 h-1 bg-white rounded-full"
+                  style={{
+                    top: `${star.top}%`,
+                    left: `${star.left}%`,
+                    animationName: 'shooting-star',
+                    animationDuration: `${star.duration}s`,
+                    animationTimingFunction: 'ease-in',
+                    animationIterationCount: 'infinite',
+                    animationDelay: `${star.delay}s`,
+                    boxShadow: '0 0 4px 2px rgba(255,255,255,0.3)',
+                  }}
+                />
+              ))}
+            </div>
+          )}
 
           {/* Black Hole Effect */}
           <div className="absolute top-1/4 right-[15%] w-64 h-64 hidden lg:block">
@@ -241,6 +256,9 @@ export default function Home() {
           isVisible.about ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
+        {/* Subtle Lighting Effect */}
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.08),transparent_70%)] blur-3xl pointer-events-none" />
+
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-center text-white">
             About Me
@@ -311,6 +329,13 @@ export default function Home() {
           isVisible.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
+        {/* Subtle Lighting Effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.1),transparent_70%)] blur-3xl" />
+          <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(74,111,255,0.08),transparent_70%)] blur-3xl" />
+          <div className="absolute bottom-1/4 left-1/2 w-[550px] h-[550px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.09),transparent_70%)] blur-3xl" />
+        </div>
+
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-center text-white">
             Featured Projects
@@ -410,6 +435,13 @@ export default function Home() {
           isVisible.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
+        {/* Subtle Lighting Effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-1/3 w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.12),transparent_70%)] blur-3xl" />
+          <div className="absolute top-1/2 right-10 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(74,111,255,0.1),transparent_70%)] blur-3xl" />
+          <div className="absolute bottom-20 left-10 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.08),transparent_70%)] blur-3xl" />
+        </div>
+
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-center text-white">
             Let&apos;s Work Together

@@ -86,6 +86,9 @@ export default function TechStackCarousel() {
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[#4A6FFF]/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-[#4A6FFF]/5 rounded-full blur-3xl" />
+        {/* Additional Lighting Effects */}
+        <div className="absolute top-0 left-10 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.1),transparent_70%)] blur-3xl" />
+        <div className="absolute bottom-0 right-10 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(74,111,255,0.08),transparent_70%)] blur-3xl" />
       </div>
 
       <style jsx>{`

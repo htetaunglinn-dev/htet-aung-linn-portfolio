@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Navigation from './components/Navigation';
 import FloatingParticles from './components/FloatingParticles';
 import ParallaxCard from './components/ParallaxCard';
+import WorkExperience from './components/WorkExperience';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
@@ -239,7 +240,7 @@ export default function Home() {
           isVisible.about ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-center text-white">
             About Me
           </h2>
@@ -257,7 +258,7 @@ export default function Home() {
                 code, thoughtful architecture, and user-centric design.
               </p>
               <p className="text-gray-400 text-lg leading-relaxed">
-                Currently serving as Lead Developer at GoFive, I specialize in React, Next.js, TypeScript, and
+                Currently serving as Frontend Developer at GoFive in Bangkok, Thailand, I specialize in React, Next.js, TypeScript, and
                 cloud technologies, delivering solutions that make a real impact.
               </p>
             </div>
@@ -346,84 +347,7 @@ export default function Home() {
       </section>
 
       {/* Experience Section */}
-      <section
-        id="experience"
-        className={`py-40 px-6 relative transition-all duration-1000 ${
-          isVisible.experience ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-center text-white">
-            Work Experience
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#4169E1] to-transparent mx-auto mb-20" />
-
-          <div className="space-y-16">
-            {[
-              {
-                company: 'GoFive',
-                role: 'Lead Developer',
-                period: '2023 - Present',
-                description:
-                  'Leading development of enterprise-level applications, architecting scalable solutions, and mentoring junior developers.',
-                achievements: [
-                  'Reduced application load time by 60% through optimization',
-                  'Led team of 5 developers on multiple projects',
-                  'Implemented CI/CD pipelines reducing deployment time',
-                ],
-              },
-              {
-                company: 'ThitsaWorks',
-                role: 'Senior Full Stack Developer',
-                period: '2022 - 2023',
-                description:
-                  'Developed and maintained multiple client projects using React, Node.js, and cloud technologies.',
-                achievements: [
-                  'Delivered 15+ projects successfully with 98% client satisfaction',
-                  'Improved code quality by 40% implementing best practices',
-                  'Integrated AI/ML features for enhanced user experience',
-                ],
-              },
-              {
-                company: 'Smilax Global',
-                role: 'Full Stack Developer',
-                period: '2021 - 2022',
-                description:
-                  'Built responsive web applications and RESTful APIs for international clients.',
-                achievements: [
-                  'Implemented secure payment gateways with Stripe',
-                  'Optimized database queries improving performance by 50%',
-                  'Enhanced security protocols and compliance measures',
-                ],
-              },
-            ].map((job, index) => (
-              <div
-                key={index}
-                className="group relative pl-8 border-l-2 border-[#4169E1]/20 hover:border-[#4169E1] transition-all duration-300"
-              >
-                <div className="absolute left-0 top-0 -translate-x-[9px] w-4 h-4 bg-[#4169E1] rounded-full group-hover:scale-125 transition-transform" />
-
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-3">
-                  <div>
-                    <h3 className="text-3xl font-bold text-[#4169E1] mb-1">{job.company}</h3>
-                    <p className="text-white text-lg font-medium">{job.role}</p>
-                  </div>
-                  <div className="text-gray-400 text-sm mt-2 md:mt-1 font-medium">{job.period}</div>
-                </div>
-                <p className="text-gray-400 mb-6 leading-relaxed">{job.description}</p>
-                <div className="space-y-3">
-                  {job.achievements.map((achievement, idx) => (
-                    <div key={idx} className="flex items-start gap-3 text-gray-400">
-                      <span className="text-[#4169E1] mt-1 text-sm">▹</span>
-                      <span className="leading-relaxed">{achievement}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WorkExperience />
 
       {/* Projects Section */}
       <section

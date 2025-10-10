@@ -4,15 +4,11 @@ import { useEffect, useState } from 'react';
 import Navigation from './components/Navigation';
 import FloatingParticles from './components/FloatingParticles';
 import ParallaxCard from './components/ParallaxCard';
-import { useParallax } from './hooks/useParallax';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [revealedContacts, setRevealedContacts] = useState<Record<string, boolean>>({});
   const [stars, setStars] = useState<Array<{ top: number; left: number; size: 'lg' | 'md' | 'sm'; duration: number; delay: number; opacity?: number }>>([]);
-  const parallaxBg = useParallax(0.5);
-  const parallaxMid = useParallax(0.3);
-  const parallaxSlow = useParallax(0.15);
 
   const handleRevealContact = (type: string) => {
     setRevealedContacts(prev => ({ ...prev, [type]: true }));
@@ -83,18 +79,15 @@ export default function Home() {
           {/* Background Gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
 
-          {/* Nebula/Galaxy Clouds with Parallax */}
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{ transform: `translateY(${parallaxBg}px)` }}
-          >
+          {/* Nebula/Galaxy Clouds */}
+          <div className="absolute inset-0 opacity-30">
             <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.15),rgba(138,43,226,0.1),transparent_70%)] blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
             <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(138,43,226,0.12),rgba(65,105,225,0.08),transparent_70%)] blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
             <div className="absolute top-1/3 left-1/2 w-[400px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(79,70,229,0.1),transparent_60%)] blur-2xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
           </div>
 
           {/* Starfield Layers - Fixed (No Parallax) */}
-          <div className="absolute inset-0 opacity-40">
+          <div className="absolute inset-0 opacity-40" style={{ transform: 'translateZ(0)' }}>
             {stars.map((star, i) => (
               <div
                 key={`star-${star.size}-${i}`}
@@ -106,6 +99,7 @@ export default function Home() {
                 style={{
                   top: `${star.top}%`,
                   left: `${star.left}%`,
+                  transform: 'translate3d(0, 0, 0)',
                   ...(star.duration > 0 && {
                     animationDuration: `${star.duration}s`,
                     animationDelay: `${star.delay}s`,
@@ -162,21 +156,15 @@ export default function Home() {
             }} />
           </div>
 
-          {/* Floating Stats Cards with Parallax */}
-          <div
-            className="absolute top-1/4 left-[8%] z-20 animate-float hidden lg:block"
-            style={{ transform: `translateY(${parallaxMid * -1}px)` }}
-          >
+          {/* Floating Stats Cards */}
+          <div className="absolute top-1/4 left-[8%] z-20 animate-float hidden lg:block">
             <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
               <p className="text-4xl font-bold text-[#4169E1] mb-1">4+</p>
               <p className="text-xs text-gray-400 tracking-wide">Years Experience</p>
             </div>
           </div>
 
-          <div
-            className="absolute bottom-1/4 right-[8%] z-20 animate-float-delayed hidden lg:block"
-            style={{ transform: `translateY(${parallaxSlow * -1}px)` }}
-          >
+          <div className="absolute bottom-1/4 right-[8%] z-20 animate-float-delayed hidden lg:block">
             <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
               <p className="text-4xl font-bold text-[#4169E1] mb-1">50+</p>
               <p className="text-xs text-gray-400 tracking-wide">Projects Delivered</p>
@@ -185,10 +173,7 @@ export default function Home() {
 
           <div
             className="absolute top-1/3 right-[12%] z-20 animate-float hidden lg:block"
-            style={{
-              animationDelay: '0.5s',
-              transform: `translateY(${parallaxMid * -0.7}px)`
-            }}
+            style={{ animationDelay: '0.5s' }}
           >
             <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
               <p className="text-4xl font-bold text-[#4169E1] mb-1">98%</p>
@@ -197,10 +182,7 @@ export default function Home() {
           </div>
 
           {/* Floating Depth Layers */}
-          <div
-            className="absolute inset-0 opacity-20 pointer-events-none"
-            style={{ transform: `translateY(${parallaxSlow * 0.8}px)` }}
-          >
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
             <div className="absolute top-20 left-10 w-32 h-32 bg-[#4169E1]/20 rounded-full blur-3xl" />
             <div className="absolute bottom-40 right-20 w-40 h-40 bg-[#5a7dee]/20 rounded-full blur-3xl" />
             <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-[#4169E1]/15 rounded-full blur-2xl" />
@@ -208,36 +190,24 @@ export default function Home() {
 
           {/* Content */}
           <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
-            <div
-              className="mb-8"
-              style={{ transform: `translateY(${parallaxSlow * -0.5}px)` }}
-            >
+            <div className="mb-8">
               <span className="inline-block px-4 py-2 bg-[#4169E1]/10 border border-[#4169E1]/20 rounded-full text-[#4169E1] text-sm font-medium mb-8">
                 Full Stack Developer
               </span>
             </div>
-            <h1
-              className="text-5xl md:text-6xl lg:text-8xl font-bold mb-8 text-white leading-[1.15] tracking-tight"
-              style={{ transform: `translateY(${parallaxSlow * -0.3}px)` }}
-            >
+            <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold mb-8 text-white leading-[1.15] tracking-tight">
               Crafting Digital
               <br />
               <span className="bg-gradient-to-r from-[#4169E1] via-[#5a7dee] to-[#4169E1] bg-clip-text text-transparent">
                 Excellence
               </span>
             </h1>
-            <p
-              className="text-xl md:text-2xl text-gray-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light"
-              style={{ transform: `translateY(${parallaxSlow * -0.2}px)` }}
-            >
+            <p className="text-xl md:text-2xl text-gray-400 mb-16 max-w-3xl mx-auto leading-relaxed font-light">
               Building exceptional web experiences with modern technologies,
               <br className="hidden md:block" />
               elegant architecture, and meticulous attention to detail
             </p>
-            <div
-              className="flex gap-6 justify-center flex-wrap"
-              style={{ transform: `translateY(${parallaxSlow * -0.1}px)` }}
-            >
+            <div className="flex gap-6 justify-center flex-wrap">
               <a
                 href="#projects"
                 className="group px-10 py-4 bg-[#4169E1] hover:bg-[#3454b4] text-white rounded-lg transition-all duration-300 hover:scale-105 font-semibold shadow-2xl shadow-[#4169E1]/20"

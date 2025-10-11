@@ -35,15 +35,35 @@ export default function WorkExperienceCard({
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Set visible immediately on mount to avoid blank cards
-    setIsVisible(true);
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const element = document.getElementById(`experience-card-${index}`);
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => observer.disconnect();
+  }, [index]);
 
   return (
     <div
-      className="relative opacity-100 translate-y-0"
+      id={`experience-card-${index}`}
+      className={`relative transition-all duration-700 ease-out ${
+        isVisible
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 translate-y-10'
+      }`}
       style={{
-        animation: `fadeInUp 0.7s ease-out ${index * 0.15}s both`
+        transitionDelay: `${index * 150}ms`
       }}
     >
       {/* Content Grid */}
@@ -59,7 +79,7 @@ export default function WorkExperienceCard({
                   alt={`${company} logo`}
                   width={80}
                   height={80}
-                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300 rounded-lg"
                 />
               </div>
             </div>
@@ -88,7 +108,7 @@ export default function WorkExperienceCard({
                       alt={`${company} logo`}
                       width={64}
                       height={64}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain rounded-lg"
                     />
                   </div>
                 </div>

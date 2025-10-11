@@ -288,6 +288,7 @@ export default function Home() {
                 {[
                   'React',
                   'Next.js',
+                  'Angular',
                   'TypeScript',
                   'Node.js',
                   'Express',

@@ -75,6 +75,8 @@ const workExperience: WorkExperienceItem[] = [
 
 export default function WorkExperience() {
   const [sectionVisible, setSectionVisible] = useState(false);
+  const [statsVisible, setStatsVisible] = useState(false);
+  const [counts, setCounts] = useState({ years: 0, projects: 0, satisfaction: 0, users: 0 });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -95,6 +97,62 @@ export default function WorkExperience() {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setStatsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
+    );
+
+    const stats = document.getElementById('experience-stats');
+    if (stats) {
+      observer.observe(stats);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!statsVisible) return;
+
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const stepDuration = duration / steps;
+
+    const targets = {
+      years: 4,
+      projects: 50,
+      satisfaction: 98,
+      users: 100,
+    };
+
+    let currentStep = 0;
+
+    const timer = setInterval(() => {
+      currentStep++;
+      const progress = currentStep / steps;
+
+      setCounts({
+        years: Math.floor(targets.years * progress),
+        projects: Math.floor(targets.projects * progress),
+        satisfaction: Math.floor(targets.satisfaction * progress),
+        users: Math.floor(targets.users * progress),
+      });
+
+      if (currentStep >= steps) {
+        clearInterval(timer);
+        setCounts(targets);
+      }
+    }, stepDuration);
+
+    return () => clearInterval(timer);
+  }, [statsVisible]);
 
   return (
     <section
@@ -128,19 +186,19 @@ export default function WorkExperience() {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div id="experience-stats" className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { value: '4+', label: 'Years Experience' },
-            { value: '50+', label: 'Projects Completed' },
-            { value: '98%', label: 'Client Satisfaction' },
-            { value: '100K+', label: 'Users Served' },
+            { value: counts.years, suffix: '+', label: 'Years Experience' },
+            { value: counts.projects, suffix: '+', label: 'Projects Completed' },
+            { value: counts.satisfaction, suffix: '%', label: 'Client Satisfaction' },
+            { value: counts.users, suffix: 'K+', label: 'Users Served' },
           ].map((stat, index) => (
             <div
               key={index}
               className="bg-black/40 backdrop-blur-md border border-[#4A6FFF]/10 rounded-2xl p-6 text-center hover:border-[#4A6FFF]/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#4A6FFF]/10"
             >
               <div className="text-3xl md:text-4xl font-bold text-[#4A6FFF] mb-2">
-                {stat.value}
+                {stat.value}{stat.suffix}
               </div>
               <div className="text-sm text-gray-400 font-medium">{stat.label}</div>
             </div>

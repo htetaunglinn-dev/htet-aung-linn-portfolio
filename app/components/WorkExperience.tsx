@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import WorkExperienceCard from './WorkExperienceCard';
+import { useEffect, useState } from "react";
+import WorkExperienceCard from "./WorkExperienceCard";
 
 interface WorkExperienceItem {
   company: string;
@@ -9,7 +9,6 @@ interface WorkExperienceItem {
   logo: string;
   position: string;
   period: string;
-  duration: string;
   location: string;
   description: string;
   achievements: string[];
@@ -18,65 +17,97 @@ interface WorkExperienceItem {
 
 const workExperience: WorkExperienceItem[] = [
   {
-    company: 'GoFive',
-    companyUrl: 'https://www.gofive.co.th/',
-    logo: 'https://res.cloudinary.com/htetaunglinn-dev/image/upload/v1739081714/Portfolio%20Next%20JS%202025/logo/3.png',
-    position: 'Frontend Developer',
-    period: 'Jan 2024 - Present',
-    duration: '1 year 9 months',
-    location: 'Bangkok, Thailand',
+    company: "GoFive",
+    companyUrl: "https://www.gofive.co.th/",
+    logo: "https://res.cloudinary.com/htetaunglinn-dev/image/upload/v1739081714/Portfolio%20Next%20JS%202025/logo/3.png",
+    position: "Software Engineer",
+    period: "January 2024 - Present",
+    location: "Bangkok, Thailand",
     description:
-      'Leading development of enterprise-level web applications, architecting scalable solutions with modern technologies, and delivering high-performance user experiences for international clients.',
+      "Leading end-to-end development of enterprise CRM system from concept to production deployment. Driving technical excellence through performance optimization, mentorship, and data-driven architectural decisions that directly impact user experience and business metrics.",
     achievements: [
-      'Architected and deployed 3 enterprise SaaS platforms serving 50,000+ active users with 99.9% uptime',
-      'Reduced application load time by 60% through code splitting, lazy loading, and optimization techniques',
-      'Implemented real-time collaboration features using WebSockets, improving team productivity by 45%',
-      'Led team of 5 developers, conducting code reviews and establishing best practices that improved code quality by 40%',
+      "Spearheaded greenfield CRM project from requirements gathering through architecture design and production deployment, collaborating directly with stakeholders and enterprise clients",
+      "Architected performance optimizations using data-driven analysis and strategic code splitting, achieving 15% efficiency gains and 10% faster load times across the platform",
+      "Mentored 3 junior developers on Angular best practices, TypeScript implementation, and modern frontend architecture patterns, accelerating team velocity by 25%",
+      "Engineered advanced memory optimization with efficient state management solutions, reducing overhead by 30% and significantly improving application stability",
+      "Built automated systems integrating with existing enterprise platforms, streamlining workflows and reducing delivery delays by 12%",
+      "Led data-driven UI redesign initiative leveraging user analytics and modern React patterns, resulting in 20% increase in user satisfaction scores",
     ],
-    techStack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Redux', 'React Query', 'AWS', 'Docker'],
+    techStack: [
+      "Angular",
+      "Rxjs",
+      "TypeScript",
+      "Tailwind CSS",
+      "SCSS",
+      "AWS",
+      "Storybook",
+      "Git",
+    ],
   },
   {
-    company: 'ThitsaWorks',
-    companyUrl: 'https://www.thitsaworks.com/',
-    logo: 'https://res.cloudinary.com/htetaunglinn-dev/image/upload/v1739081714/Portfolio%20Next%20JS%202025/logo/2.png',
-    position: 'Frontend Developer',
-    period: 'Apr 2023 - Jan 2024',
-    duration: '9 months',
-    location: 'Yangon, Myanmar',
+    company: "ThitsaWorks",
+    companyUrl: "https://www.thitsaworks.com/",
+    logo: "https://res.cloudinary.com/htetaunglinn-dev/image/upload/v1739081714/Portfolio%20Next%20JS%202025/logo/2.png",
+    position: "Software Engineer",
+    period: "June 2023 - January 2024",
+    location: "Yangon, Myanmar",
     description:
-      'Developed and maintained multiple client projects using React, Node.js, and cloud technologies. Delivered full-stack solutions with focus on performance and user experience.',
+      "Delivered high-impact fintech solutions including digital wallet and financial portals. Led cross-functional teams to build secure, scalable applications while optimizing APIs and establishing development best practices across the organization.",
     achievements: [
-      'Successfully delivered 15+ client projects with 98% satisfaction rate and zero critical bugs',
-      'Implemented CI/CD pipelines using GitHub Actions, reducing deployment time from 2 hours to 15 minutes',
-      'Integrated AI/ML features including image recognition and natural language processing for enhanced UX',
-      'Optimized database queries and API responses, improving overall application performance by 50%',
+      "Enhanced DFSP Portal with proactive maintenance and strategic feature integration, driving 30% boost in user engagement within Q1 post-launch",
+      "Optimized RESTful APIs for enterprise scalability, slashing response times by 20% and enabling seamless future integrations with third-party services",
+      "Designed intuitive, user-centric interfaces for Finance Portal and Admin UI using React and modern UX patterns, improving overall user experience by 25%",
+      "Led cross-functional team to successfully launch Thitsa Wallet—a secure digital wallet platform for financial transfers—on schedule and within budget",
+      "Established comprehensive documentation processes and development best practices, enhancing team transparency and reducing onboarding time by 40%",
     ],
-    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'GraphQL', 'AWS', 'Git'],
+    techStack: [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "PostgreSQL",
+      "Docker",
+      "REST APIs",
+      "Git",
+    ],
   },
   {
-    company: 'Smilax Global',
-    companyUrl: 'https://smilaxglobal.com/',
-    logo: 'https://res.cloudinary.com/htetaunglinn-dev/image/upload/v1739081714/Portfolio%20Next%20JS%202025/logo/1.png',
-    position: 'Frontend Developer',
-    period: 'Mar 2022 - Feb 2023',
-    duration: '1 year',
-    location: 'Yangon, Myanmar',
+    company: "Smilax Global",
+    companyUrl: "https://smilaxglobal.com/",
+    logo: "https://res.cloudinary.com/htetaunglinn-dev/image/upload/v1739081714/Portfolio%20Next%20JS%202025/logo/1.png",
+    position: "Mid Frontend Developer",
+    period: "June 2022 - January 2023",
+    location: "Yangon, Myanmar",
     description:
-      'Built responsive web applications and RESTful APIs for international clients, focusing on e-commerce solutions with secure payment integrations and scalable architectures.',
+      "Built enterprise-grade access management software and tracking solutions for multiple clients. Focused on pixel-perfect UI implementation, performance optimization, and security-first architecture while delivering comprehensive documentation and SOC 2 compliance.",
     achievements: [
-      'Developed secure e-commerce platform processing $500K+ in transactions using Stripe integration',
-      'Implemented comprehensive security protocols including JWT authentication and role-based access control',
-      'Enhanced database performance by 50% through query optimization and proper indexing strategies',
-      'Created reusable component library reducing development time for new features by 30%',
+      "Delivered pixel-perfect UI implementations from Figma designs using React and Tailwind CSS, achieving 98% design accuracy and 45% faster load times",
+      "Built and optimized reusable component architecture, reducing bundle size by 50% and dramatically improving application performance across multiple enterprise projects",
+      "Developed comprehensive Access Management Software with detailed technical documentation, leading to successful deployment across 3 major enterprise clients",
+      "Integrated Google Maps API and custom QR code tracking system, reducing manual monitoring effort by 40% and improving real-time tracking accuracy",
+      "Implemented robust JWT authentication and security middleware protocols, decreasing vulnerability risks by 15% and ensuring full SOC 2 compliance",
     ],
-    techStack: ['React', 'JavaScript', 'Node.js', 'MySQL', 'Stripe', 'REST APIs', 'Linux', 'Nginx'],
+    techStack: [
+      "React",
+      "JavaScript",
+      "Tailwind CSS",
+      "REST APIs",
+      "JWT",
+      "Google Maps API",
+      "Material UI",
+    ],
   },
 ];
 
 export default function WorkExperience() {
   const [sectionVisible, setSectionVisible] = useState(false);
   const [statsVisible, setStatsVisible] = useState(false);
-  const [counts, setCounts] = useState({ years: 0, projects: 0, satisfaction: 0, users: 0 });
+  const [counts, setCounts] = useState({
+    years: 0,
+    projects: 0,
+    satisfaction: 0,
+    users: 0,
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -90,7 +121,7 @@ export default function WorkExperience() {
       { threshold: 0.1 }
     );
 
-    const section = document.getElementById('experience');
+    const section = document.getElementById("experience");
     if (section) {
       observer.observe(section);
     }
@@ -107,10 +138,10 @@ export default function WorkExperience() {
           }
         });
       },
-      { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
+      { threshold: 0.2, rootMargin: "0px 0px -100px 0px" }
     );
 
-    const stats = document.getElementById('experience-stats');
+    const stats = document.getElementById("experience-stats");
     if (stats) {
       observer.observe(stats);
     }
@@ -158,7 +189,9 @@ export default function WorkExperience() {
     <section
       id="experience"
       className={`py-40 px-6 relative transition-all duration-1000 ${
-        sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        sectionVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-10"
       }`}
     >
       <div className="max-w-7xl mx-auto">
@@ -169,7 +202,8 @@ export default function WorkExperience() {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#4A6FFF] to-transparent mx-auto mb-6" />
           <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            Building impactful solutions and leading teams across diverse industries
+            Building impactful solutions and leading teams across diverse
+            industries
           </p>
         </div>
 
@@ -186,21 +220,35 @@ export default function WorkExperience() {
         </div>
 
         {/* Stats Section */}
-        <div id="experience-stats" className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div
+          id="experience-stats"
+          className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-6"
+        >
           {[
-            { value: counts.years, suffix: '+', label: 'Years Experience' },
-            { value: counts.projects, suffix: '+', label: 'Projects Completed' },
-            { value: counts.satisfaction, suffix: '%', label: 'Client Satisfaction' },
-            { value: counts.users, suffix: 'K+', label: 'Users Served' },
+            { value: counts.years, suffix: "+", label: "Years Experience" },
+            {
+              value: counts.projects,
+              suffix: "+",
+              label: "Projects Completed",
+            },
+            {
+              value: counts.satisfaction,
+              suffix: "%",
+              label: "Client Satisfaction",
+            },
+            { value: counts.users, suffix: "K+", label: "Users Served" },
           ].map((stat, index) => (
             <div
               key={index}
               className="bg-black/40 backdrop-blur-md border border-[#4A6FFF]/10 rounded-2xl p-6 text-center hover:border-[#4A6FFF]/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#4A6FFF]/10"
             >
               <div className="text-3xl md:text-4xl font-bold text-[#4A6FFF] mb-2">
-                {stat.value}{stat.suffix}
+                {stat.value}
+                {stat.suffix}
               </div>
-              <div className="text-sm text-gray-400 font-medium">{stat.label}</div>
+              <div className="text-sm text-gray-400 font-medium">
+                {stat.label}
+              </div>
             </div>
           ))}
         </div>

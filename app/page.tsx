@@ -209,7 +209,7 @@ export default function Home() {
           <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
             <div className="mb-8">
               <span className="inline-block px-4 py-2 bg-[#4169E1]/10 border border-[#4169E1]/20 rounded-full text-[#4169E1] text-sm font-medium mb-8">
-                Full Stack Developer
+                Software Engineer
               </span>
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold mb-8 text-white leading-[1.15] tracking-tight">
@@ -268,17 +268,18 @@ export default function Home() {
           <div className="grid md:grid-cols-5 gap-16 items-start">
             <div className="md:col-span-3 space-y-6">
               <p className="text-gray-400 text-lg leading-relaxed">
-                I&apos;m a passionate Full Stack Developer with over 4 years of experience crafting elegant digital
-                solutions. My journey in tech has been driven by a commitment to excellence and innovation.
+                I&apos;m a passionate Software Engineer with 4+ years of experience building high-performance web applications
+                that drive business growth. My expertise spans the entire development lifecycle—from architecture design to
+                production deployment.
               </p>
               <p className="text-gray-400 text-lg leading-relaxed">
-                From building scalable web applications to implementing cutting-edge AI solutions, I bring
-                technical expertise and creative problem-solving to every project. My approach combines clean
-                code, thoughtful architecture, and user-centric design.
+                Specializing in React ecosystem and modern frontend technologies, I&apos;ve delivered enterprise CRM systems,
+                fintech platforms, and scalable SaaS applications. I focus on performance optimization, clean architecture,
+                and mentoring teams to build exceptional user experiences.
               </p>
               <p className="text-gray-400 text-lg leading-relaxed">
-                Currently serving as Frontend Developer at GoFive in Bangkok, Thailand, I specialize in React, Next.js, TypeScript, and
-                cloud technologies, delivering solutions that make a real impact.
+                Currently serving as Software Engineer at GoFive in Bangkok, Thailand, where I lead end-to-end development
+                of enterprise solutions, achieving measurable improvements in performance, user satisfaction, and team efficiency.
               </p>
             </div>
 
@@ -559,7 +560,7 @@ export default function Home() {
               <h3 className="text-2xl font-bold bg-gradient-to-r from-[#4169E1] to-[#5a7dee] bg-clip-text text-transparent mb-3">
                 Htet Aung Linn
               </h3>
-              <p className="text-gray-400">Full Stack Developer & Tech Enthusiast</p>
+              <p className="text-gray-400">Software Engineer & Tech Enthusiast</p>
               <p className="text-gray-500 text-sm mt-2">Building the future, one line at a time</p>
             </div>
 

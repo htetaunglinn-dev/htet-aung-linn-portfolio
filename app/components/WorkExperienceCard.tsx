@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface WorkExperienceCardProps {
   company: string;
@@ -24,7 +24,6 @@ export default function WorkExperienceCard({
   logo,
   position,
   period,
-  duration,
   location,
   description,
   achievements,
@@ -58,12 +57,10 @@ export default function WorkExperienceCard({
     <div
       id={`experience-card-${index}`}
       className={`relative transition-all duration-700 ease-out ${
-        isVisible
-          ? 'opacity-100 translate-y-0'
-          : 'opacity-0 translate-y-10'
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
       style={{
-        transitionDelay: `${index * 150}ms`
+        transitionDelay: `${index * 150}ms`,
       }}
     >
       {/* Content Grid */}
@@ -89,7 +86,6 @@ export default function WorkExperienceCard({
               <div className="px-4 py-2 bg-[#4A6FFF]/10 border border-[#4A6FFF]/30 rounded-lg text-[#4A6FFF] text-sm font-semibold mb-2 backdrop-blur-sm">
                 {period}
               </div>
-              <span className="text-gray-500 text-xs font-medium">{duration}</span>
             </div>
           </div>
         </div>
@@ -97,7 +93,6 @@ export default function WorkExperienceCard({
         {/* Right Column - Main Content */}
         <div className="md:col-span-2">
           <div className="group bg-black/40 backdrop-blur-md border border-[#4A6FFF]/10 rounded-2xl p-8 hover:border-[#4A6FFF]/30 transition-all duration-500 hover:shadow-2xl hover:shadow-[#4A6FFF]/10 hover:-translate-y-1">
-
             {/* Mobile - Logo and Date */}
             <div className="md:hidden mb-6 flex items-start justify-between">
               <div className="flex items-center gap-4">
@@ -116,7 +111,6 @@ export default function WorkExperienceCard({
                   <div className="px-3 py-1.5 bg-[#4A6FFF]/10 border border-[#4A6FFF]/30 rounded-lg text-[#4A6FFF] text-xs font-semibold mb-1">
                     {period}
                   </div>
-                  <span className="text-gray-500 text-xs font-medium">{duration}</span>
                 </div>
               </div>
             </div>
@@ -145,9 +139,16 @@ export default function WorkExperienceCard({
             </a>
 
             {/* Position and Location */}
-            <h3 className="text-xl font-semibold text-gray-300 mb-1">{position}</h3>
+            <h3 className="text-xl font-semibold text-gray-300 mb-1">
+              {position}
+            </h3>
             <p className="text-sm text-gray-500 mb-4 flex items-center gap-2">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -165,7 +166,9 @@ export default function WorkExperienceCard({
             </p>
 
             {/* Description */}
-            <p className="text-gray-400 leading-relaxed mb-6 text-[15px]">{description}</p>
+            <p className="text-gray-400 leading-relaxed mb-6 text-[15px]">
+              {description}
+            </p>
 
             {/* Achievements */}
             <div className="space-y-3 mb-6">

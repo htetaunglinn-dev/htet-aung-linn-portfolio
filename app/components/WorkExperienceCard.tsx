@@ -65,10 +65,10 @@ export default function WorkExperienceCard({
       {/* Content Grid */}
       <div className="grid md:grid-cols-3 gap-8">
         {/* Left Column - Date and Logo (Desktop) */}
-        <div className="hidden md:flex flex-col items-end pr-12 text-right">
-          <div className="sticky top-24">
+        <div className="hidden md:flex flex-col items-end pr-12">
+          <div className="sticky top-24 w-full max-w-[240px] flex flex-col items-start gap-4">
             {/* Company Logo */}
-            <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl p-3 mb-4 border border-[#4A6FFF]/20 hover:border-[#4A6FFF]/50 transition-all duration-300 hover:scale-105 shadow-lg group">
+            <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-[#4A6FFF]/20 hover:border-[#4A6FFF]/50 transition-all duration-300 hover:scale-105 shadow-lg group">
               <div className="relative w-full h-full">
                 <Image
                   src={logo}
@@ -81,10 +81,8 @@ export default function WorkExperienceCard({
             </div>
 
             {/* Date Badge */}
-            <div className="inline-flex flex-col items-end">
-              <div className="px-4 py-2 bg-[#4A6FFF]/10 border border-[#4A6FFF]/30 rounded-lg text-[#4A6FFF] text-sm font-semibold mb-2 backdrop-blur-sm">
-                {period}
-              </div>
+            <div className="px-4 py-2 bg-[#4A6FFF]/10 border border-[#4A6FFF]/30 rounded-lg text-[#4A6FFF] text-sm font-semibold backdrop-blur-sm">
+              {period}
             </div>
           </div>
         </div>

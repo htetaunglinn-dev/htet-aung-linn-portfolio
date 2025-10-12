@@ -9,7 +9,6 @@ interface WorkExperienceCardProps {
   logo: string;
   position: string;
   period: string;
-  duration: string;
   location: string;
   description: string;
   achievements: string[];

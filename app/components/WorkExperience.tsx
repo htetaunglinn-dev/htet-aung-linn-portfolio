@@ -26,12 +26,9 @@ const workExperience: WorkExperienceItem[] = [
     description:
       "Leading end-to-end development of enterprise CRM system from concept to production deployment. Driving technical excellence through performance optimization, mentorship, and data-driven architectural decisions that directly impact user experience and business metrics.",
     achievements: [
-      "Spearheaded greenfield CRM project from requirements gathering through architecture design and production deployment, collaborating directly with stakeholders and enterprise clients",
-      "Architected performance optimizations using data-driven analysis and strategic code splitting, achieving 15% efficiency gains and 10% faster load times across the platform",
-      "Mentored 3 junior developers on Angular best practices, TypeScript implementation, and modern frontend architecture patterns, accelerating team velocity by 25%",
-      "Engineered advanced memory optimization with efficient state management solutions, reducing overhead by 30% and significantly improving application stability",
-      "Built automated systems integrating with existing enterprise platforms, streamlining workflows and reducing delivery delays by 12%",
-      "Led data-driven UI redesign initiative leveraging user analytics and modern React patterns, resulting in 20% increase in user satisfaction scores",
+      "Led end-to-end development of enterprise CRM from concept to production, collaborating directly with stakeholders and delivering 15% performance gains through strategic optimization",
+      "Mentored 3 junior developers on Angular and TypeScript best practices, accelerating team velocity by 25% while establishing scalable architecture patterns",
+      "Engineered memory optimizations reducing overhead by 30% and drove UI redesign initiative that increased user satisfaction by 20%",
     ],
     techStack: [
       "Angular",
@@ -54,11 +51,9 @@ const workExperience: WorkExperienceItem[] = [
     description:
       "Delivered high-impact fintech solutions including digital wallet and financial portals. Led cross-functional teams to build secure, scalable applications while optimizing APIs and establishing development best practices across the organization.",
     achievements: [
-      "Enhanced DFSP Portal with proactive maintenance and strategic feature integration, driving 30% boost in user engagement within Q1 post-launch",
-      "Optimized RESTful APIs for enterprise scalability, slashing response times by 20% and enabling seamless future integrations with third-party services",
-      "Designed intuitive, user-centric interfaces for Finance Portal and Admin UI using React and modern UX patterns, improving overall user experience by 25%",
-      "Led cross-functional team to successfully launch Thitsa Wallet—a secure digital wallet platform for financial transfers—on schedule and within budget",
-      "Established comprehensive documentation processes and development best practices, enhancing team transparency and reducing onboarding time by 40%",
+      "Led cross-functional team to launch Thitsa Wallet digital platform on schedule, delivering secure financial transfer capabilities and 30% user engagement boost",
+      "Optimized RESTful APIs achieving 20% faster response times while designing intuitive React interfaces that improved user experience by 25%",
+      "Established comprehensive documentation and development best practices, reducing onboarding time by 40% and enhancing team collaboration",
     ],
     techStack: [
       "React",
@@ -81,11 +76,9 @@ const workExperience: WorkExperienceItem[] = [
     description:
       "Built enterprise-grade access management software and tracking solutions for multiple clients. Focused on pixel-perfect UI implementation, performance optimization, and security-first architecture while delivering comprehensive documentation and SOC 2 compliance.",
     achievements: [
-      "Delivered pixel-perfect UI implementations from Figma designs using React and Tailwind CSS, achieving 98% design accuracy and 45% faster load times",
-      "Built and optimized reusable component architecture, reducing bundle size by 50% and dramatically improving application performance across multiple enterprise projects",
-      "Developed comprehensive Access Management Software with detailed technical documentation, leading to successful deployment across 3 major enterprise clients",
-      "Integrated Google Maps API and custom QR code tracking system, reducing manual monitoring effort by 40% and improving real-time tracking accuracy",
-      "Implemented robust JWT authentication and security middleware protocols, decreasing vulnerability risks by 15% and ensuring full SOC 2 compliance",
+      "Delivered pixel-perfect React UIs with 98% design accuracy and optimized component architecture, reducing bundle size by 50% and improving load times by 45%",
+      "Built Access Management Software deployed across 3 enterprise clients, integrating Google Maps API and QR tracking to reduce manual monitoring by 40%",
+      "Implemented JWT authentication and security middleware ensuring SOC 2 compliance while decreasing vulnerability risks by 15%",
     ],
     techStack: [
       "React",

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import SecureExternalLink from "./SecureExternalLink";
 
 interface WorkExperienceCardProps {
   company: string;
@@ -113,10 +114,9 @@ export default function WorkExperienceCard({
             </div>
 
             {/* Company Name */}
-            <a
+            <SecureExternalLink
               href={companyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              ariaLabel={`Visit ${company} website`}
               className="inline-flex items-center gap-2 text-3xl font-bold text-white hover:text-[#4A6FFF] transition-colors duration-300 mb-2 group/link"
             >
               {company}
@@ -133,7 +133,7 @@ export default function WorkExperienceCard({
                   d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                 />
               </svg>
-            </a>
+            </SecureExternalLink>
 
             {/* Position and Location */}
             <h3 className="text-xl font-semibold text-gray-300 mb-1">

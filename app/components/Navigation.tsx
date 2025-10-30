@@ -10,7 +10,7 @@ export default function Navigation() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
+      const sections = ['home', 'about', 'experience', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -38,7 +38,6 @@ export default function Navigation() {
 
   const navItems = [
     { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
@@ -66,7 +65,7 @@ export default function Navigation() {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`text-sm font-medium transition-all hover:text-[#4169E1] ${
+              className={`text-sm font-medium transition-all hover:text-[#4169E1] cursor-pointer ${
                 activeSection === item.id ? 'text-[#4169E1]' : 'text-gray-300'
               }`}
             >
@@ -78,7 +77,7 @@ export default function Navigation() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => scrollToSection('contact')}
-            className="px-6 py-2 bg-[#4169E1] hover:bg-[#3454b4] text-white rounded-lg transition-all duration-300 hover:scale-105 text-sm font-semibold"
+            className="px-6 py-2 bg-[#4169E1] hover:bg-[#3454b4] text-white rounded-lg transition-all duration-300 hover:scale-105 text-sm font-semibold cursor-pointer"
           >
             Get in Touch
           </button>

@@ -518,7 +518,8 @@ export default function Home() {
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </a>
                 <a
-                  href="/resume.pdf"
+                  href="/Htet_Aung_Linn_Resume.pdf"
+                  download="Htet_Aung_Linn_Resume.pdf"
                   className="inline-flex items-center gap-3 px-10 py-5 bg-transparent hover:bg-white/5 border-2 border-[#4169E1]/30 hover:border-[#4169E1] text-white rounded-xl transition-all duration-300 hover:scale-105 font-bold text-lg"
                 >
                   Download Resume

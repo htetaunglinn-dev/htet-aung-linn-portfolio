@@ -1,53 +1,53 @@
 export const PROJECTS = [
   {
-    title: "AI-Powered Analytics Dashboard",
+    title: "Crypto AI Analysis",
     description:
-      "Real-time analytics platform with ML predictions and data visualization for enterprise clients",
+      "Real-time crypto analytics platform providing AI-driven market insights and trend analysis.",
     tags: ["Next.js", "Python", "TensorFlow"],
     impact: "+200% efficiency",
     image: "/Project 1.svg",
     link: "https://crypto-ai-analysis.vercel.app/",
   },
   {
-    title: "E-Commerce Marketplace",
+    title: "Forest Queen",
     description:
-      "Full-featured marketplace with payment integration, admin panel, and inventory management",
+      "Premium outdoor and camping equipment e-commerce platform for adventure enthusiasts.",
     tags: ["React", "Node.js", "Stripe"],
     impact: "$500K+ revenue",
     image: "/Project 2.svg",
     link: "https://forest-queen-ecommerce.vercel.app/",
   },
   {
-    title: "Healthcare Management System",
+    title: "DevEnv",
     description:
-      "HIPAA-compliant system for patient records, appointment scheduling, and billing",
+      "The ultimate social platform connecting developers to share knowledge and insights.",
     tags: ["Next.js", "PostgreSQL", "AWS"],
     impact: "10K+ users",
     image: "/Project 3.svg",
     link: "https://dev-env-bkk.vercel.app/",
   },
   {
-    title: "Real-Time Collaboration Tool",
+    title: "HealthPass",
     description:
-      "WebSocket-based platform for team collaboration and agile project management",
+      "Your personal healthcare concierge for priority scheduling and medical coordination.",
     tags: ["React", "Socket.io", "Redis"],
     impact: "5K+ teams",
     image: "/Project 4.svg",
     link: "https://healthpass-bkk.vercel.app/",
   },
   {
-    title: "Crypto Trading Platform",
+    title: "Global Supply",
     description:
-      "Secure trading platform with real-time charts and automated algorithmic trading bots",
+      "Comprehensive logistics solution for tracking global shipments and supply chain management.",
     tags: ["Next.js", "WebSocket", "MongoDB"],
     impact: "$2M+ volume",
     image: "/Project 5.svg",
     link: "https://global-supply.vercel.app/",
   },
   {
-    title: "Social Media Dashboard",
+    title: "Airbnb Redesign",
     description:
-      "Multi-platform analytics and scheduling tool for social media managers and agencies",
+      "A pixel-perfect recreation of the Airbnb platform featuring property listings and booking workflows.",
     tags: ["React", "Node.js", "GraphQL"],
     impact: "20K+ posts",
     image: "/Project 6.svg",

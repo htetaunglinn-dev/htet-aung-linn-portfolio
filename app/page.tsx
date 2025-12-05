@@ -8,6 +8,7 @@ import ParallaxCard from './components/ParallaxCard';
 import WorkExperience from './components/WorkExperience';
 import TechStackCarousel from './components/TechStackCarousel';
 import SecureExternalLink from './components/SecureExternalLink';
+import { PROJECTS } from './project-data.const';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
@@ -347,97 +348,60 @@ export default function Home() {
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#4169E1] to-transparent mx-auto mb-20" />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'AI-Powered Analytics Dashboard',
-                description: 'Real-time analytics platform with ML predictions and data visualization for enterprise clients',
-                tags: ['Next.js', 'Python', 'TensorFlow'],
-                impact: '+200% efficiency',
-                image: '/Project 1.svg',
-              },
-              {
-                title: 'E-Commerce Marketplace',
-                description: 'Full-featured marketplace with payment integration, admin panel, and inventory management',
-                tags: ['React', 'Node.js', 'Stripe'],
-                impact: '$500K+ revenue',
-                image: '/Project 2.svg',
-              },
-              {
-                title: 'Healthcare Management System',
-                description: 'HIPAA-compliant system for patient records, appointment scheduling, and billing',
-                tags: ['Next.js', 'PostgreSQL', 'AWS'],
-                impact: '10K+ users',
-                image: '/Project 3.svg',
-              },
-              {
-                title: 'Real-Time Collaboration Tool',
-                description: 'WebSocket-based platform for team collaboration and agile project management',
-                tags: ['React', 'Socket.io', 'Redis'],
-                impact: '5K+ teams',
-                image: '/Project 4.svg',
-              },
-              {
-                title: 'Crypto Trading Platform',
-                description: 'Secure trading platform with real-time charts and automated algorithmic trading bots',
-                tags: ['Next.js', 'WebSocket', 'MongoDB'],
-                impact: '$2M+ volume',
-                image: '/Project 5.svg',
-              },
-              {
-                title: 'Social Media Dashboard',
-                description: 'Multi-platform analytics and scheduling tool for social media managers and agencies',
-                tags: ['React', 'Node.js', 'GraphQL'],
-                impact: '20K+ posts',
-                image: '/Project 6.svg',
-              },
-            ].map((project, index) => (
-              <ParallaxCard
+            {PROJECTS.map((project, index) => (
+              <a
                 key={index}
-                intensity={10}
-                className="group relative bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10"
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-full focus:outline-none focus:ring-2 focus:ring-[#4169E1] rounded-2xl"
               >
-                {/* Thumbnail Placeholder */}
-                <div className="relative w-full h-48 bg-gradient-to-br from-[#4169E1]/10 to-[#4169E1]/5 rounded-xl mb-6 border border-[#4169E1]/10 group-hover:border-[#4169E1]/30 transition-colors overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={`${project.title} project preview`}
-                    fill
-                    className="object-cover object-center"
-                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                    priority={index < 2}
-                  />
-                </div>
-
-                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#4169E1] transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-gray-400 mb-5 text-sm leading-relaxed">{project.description}</p>
-
-                <div className="flex items-center gap-2 mb-5">
-                  <span className="px-3 py-1.5 bg-[#4169E1]/10 border border-[#4169E1]/20 text-[#4169E1] text-xs rounded-lg font-semibold">
-                    {project.impact}
-                  </span>
-                </div>
-
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-white/5 border border-white/10 text-gray-400 text-xs rounded-lg"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 text-[#4169E1] font-medium text-sm group-hover:gap-3 transition-all"
+                <ParallaxCard
+                  intensity={10}
+                  className="group relative bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 h-full flex flex-col"
                 >
-                  View Project
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </a>
-              </ParallaxCard>
+                  {/* Thumbnail Placeholder */}
+                  <div className="relative w-full h-48 bg-gradient-to-br from-[#4169E1]/10 to-[#4169E1]/5 rounded-xl mb-6 border border-[#4169E1]/10 group-hover:border-[#4169E1]/30 transition-colors overflow-hidden shrink-0">
+                    <Image
+                      src={project.image}
+                      alt={`${project.title} project preview`}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      priority={index < 2}
+                    />
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#4169E1] transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-400 mb-5 text-sm leading-relaxed flex-grow">{project.description}</p>
+
+                  <div className="flex items-center gap-2 mb-5">
+                    <span className="px-3 py-1.5 bg-[#4169E1]/10 border border-[#4169E1]/20 text-[#4169E1] text-xs rounded-lg font-semibold">
+                      {project.impact}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 bg-white/5 border border-white/10 text-gray-400 text-xs rounded-lg"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div
+                    className="inline-flex items-center gap-2 text-[#4169E1] font-medium text-sm group-hover:gap-3 transition-all mt-auto"
+                  >
+                    View Project
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </div>
+                </ParallaxCard>
+              </a>
             ))}
           </div>
         </div>

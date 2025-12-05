@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Navigation from './components/Navigation';
 import FloatingParticles from './components/FloatingParticles';
@@ -352,36 +353,42 @@ export default function Home() {
                 description: 'Real-time analytics platform with ML predictions and data visualization for enterprise clients',
                 tags: ['Next.js', 'Python', 'TensorFlow'],
                 impact: '+200% efficiency',
+                image: '/Project 1.svg',
               },
               {
                 title: 'E-Commerce Marketplace',
                 description: 'Full-featured marketplace with payment integration, admin panel, and inventory management',
                 tags: ['React', 'Node.js', 'Stripe'],
                 impact: '$500K+ revenue',
+                image: '/Project 2.svg',
               },
               {
                 title: 'Healthcare Management System',
                 description: 'HIPAA-compliant system for patient records, appointment scheduling, and billing',
                 tags: ['Next.js', 'PostgreSQL', 'AWS'],
                 impact: '10K+ users',
+                image: '/Project 3.svg',
               },
               {
                 title: 'Real-Time Collaboration Tool',
                 description: 'WebSocket-based platform for team collaboration and agile project management',
                 tags: ['React', 'Socket.io', 'Redis'],
                 impact: '5K+ teams',
+                image: '/Project 4.svg',
               },
               {
                 title: 'Crypto Trading Platform',
                 description: 'Secure trading platform with real-time charts and automated algorithmic trading bots',
                 tags: ['Next.js', 'WebSocket', 'MongoDB'],
                 impact: '$2M+ volume',
+                image: '/Project 5.svg',
               },
               {
                 title: 'Social Media Dashboard',
                 description: 'Multi-platform analytics and scheduling tool for social media managers and agencies',
                 tags: ['React', 'Node.js', 'GraphQL'],
                 impact: '20K+ posts',
+                image: '/Project 6.svg',
               },
             ].map((project, index) => (
               <ParallaxCard
@@ -390,10 +397,15 @@ export default function Home() {
                 className="group relative bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10"
               >
                 {/* Thumbnail Placeholder */}
-                <div className="w-full h-48 bg-gradient-to-br from-[#4169E1]/10 to-[#4169E1]/5 rounded-xl mb-6 flex items-center justify-center border border-[#4169E1]/10 group-hover:border-[#4169E1]/30 transition-colors">
-                  <div className="text-[#4169E1]/40 text-5xl font-bold">
-                    {project.title.charAt(0)}
-                  </div>
+                <div className="relative w-full h-48 bg-gradient-to-br from-[#4169E1]/10 to-[#4169E1]/5 rounded-xl mb-6 border border-[#4169E1]/10 group-hover:border-[#4169E1]/30 transition-colors overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} project preview`}
+                    fill
+                    className="object-cover object-center"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    priority={index < 2}
+                  />
                 </div>
 
                 <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#4169E1] transition-colors">

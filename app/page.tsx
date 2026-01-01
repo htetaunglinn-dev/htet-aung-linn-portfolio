@@ -25,9 +25,10 @@ export default function Home() {
     setIsMounted(true);
 
     // Generate stars on client side only
+    // Reduced from 120 to 40 total stars for better performance
     const generatedStars = [
       // Large stars
-      ...Array.from({ length: 20 }, () => ({
+      ...Array.from({ length: 8 }, () => ({
         top: Math.random() * 100,
         left: Math.random() * 100,
         size: 'lg' as const,
@@ -35,7 +36,7 @@ export default function Home() {
         delay: Math.random() * 5,
       })),
       // Medium stars
-      ...Array.from({ length: 40 }, () => ({
+      ...Array.from({ length: 15 }, () => ({
         top: Math.random() * 100,
         left: Math.random() * 100,
         size: 'md' as const,
@@ -44,7 +45,7 @@ export default function Home() {
         opacity: 0.6 + Math.random() * 0.4,
       })),
       // Small stars
-      ...Array.from({ length: 60 }, () => ({
+      ...Array.from({ length: 17 }, () => ({
         top: Math.random() * 100,
         left: Math.random() * 100,
         size: 'sm' as const,
@@ -97,11 +98,10 @@ export default function Home() {
           {/* Background Gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
 
-          {/* Nebula/Galaxy Clouds */}
+          {/* Nebula/Galaxy Clouds - Reduced from 3 to 2 and removed animation for performance */}
           <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.15),rgba(138,43,226,0.1),transparent_70%)] blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-            <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(138,43,226,0.12),rgba(65,105,225,0.08),transparent_70%)] blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
-            <div className="absolute top-1/3 left-1/2 w-[400px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(79,70,229,0.1),transparent_60%)] blur-2xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
+            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.15),rgba(138,43,226,0.1),transparent_70%)] blur-3xl" />
+            <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(138,43,226,0.12),rgba(65,105,225,0.08),transparent_70%)] blur-3xl" />
           </div>
 
           {/* Starfield Layers - Fixed (No Parallax) */}
@@ -334,11 +334,9 @@ export default function Home() {
           isVisible.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        {/* Subtle Lighting Effects */}
+        {/* Subtle Lighting Effects - Reduced from 3 to 1 for performance */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.1),transparent_70%)] blur-3xl" />
-          <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(74,111,255,0.08),transparent_70%)] blur-3xl" />
-          <div className="absolute bottom-1/4 left-1/2 w-[550px] h-[550px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.09),transparent_70%)] blur-3xl" />
+          <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.1),transparent_70%)] blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto">
@@ -369,6 +367,9 @@ export default function Home() {
                       className="object-cover object-center"
                       sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                       priority={index < 2}
+                      loading={index < 2 ? 'eager' : 'lazy'}
+                      placeholder="blur"
+                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0icmdiYSg2NSwxMDUsMjI1LDAuMSkiLz48L3N2Zz4="
                     />
                   </div>
 
@@ -414,11 +415,9 @@ export default function Home() {
           isVisible.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
-        {/* Subtle Lighting Effects */}
+        {/* Subtle Lighting Effects - Reduced from 3 to 1 for performance */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-1/3 w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.12),transparent_70%)] blur-3xl" />
-          <div className="absolute top-1/2 right-10 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(74,111,255,0.1),transparent_70%)] blur-3xl" />
-          <div className="absolute bottom-20 left-10 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.08),transparent_70%)] blur-3xl" />
+          <div className="absolute top-1/3 left-1/3 w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.12),transparent_70%)] blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto">

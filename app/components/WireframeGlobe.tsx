@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 
-export default function WireframeGlobe() {
+function WireframeGlobe() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -141,3 +141,5 @@ export default function WireframeGlobe() {
     />
   );
 }
+
+export default memo(WireframeGlobe);

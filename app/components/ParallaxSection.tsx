@@ -19,14 +19,26 @@ export default function ParallaxSection({
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      if (!sectionRef.current) return;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!sectionRef.current) {
+            ticking = false;
+            return;
+          }
 
-      const rect = sectionRef.current.getBoundingClientRect();
-      const scrollPercent = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+          const rect = sectionRef.current.getBoundingClientRect();
+          const scrollPercent = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
 
-      if (scrollPercent >= 0 && scrollPercent <= 1) {
-        setOffset(scrollPercent * 100 * speed);
+          if (scrollPercent >= 0 && scrollPercent <= 1) {
+            setOffset(scrollPercent * 100 * speed);
+          }
+
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 

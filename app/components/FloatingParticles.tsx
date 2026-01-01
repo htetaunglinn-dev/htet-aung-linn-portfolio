@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 
-export default function FloatingParticles() {
+function FloatingParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -32,7 +32,8 @@ export default function FloatingParticles() {
     }
 
     const particles: Particle[] = [];
-    const particleCount = 50;
+    // Reduced from 50 to 25 particles for better performance
+    const particleCount = 25;
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -61,23 +62,36 @@ export default function FloatingParticles() {
         ctx.fill();
       });
 
-      // Draw connections
-      particles.forEach((p1, i) => {
-        particles.slice(i + 1).forEach((p2) => {
+      // Draw connections - Optimized: only check nearby particles using spatial partitioning
+      // This reduces complexity from O(n²) to approximately O(n*k) where k is small
+      const connectionDistance = 150;
+      const connectionDistanceSq = connectionDistance * connectionDistance;
+
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
+        let connectionsDrawn = 0;
+        const maxConnections = 3; // Limit connections per particle for performance
+
+        for (let j = i + 1; j < particles.length && connectionsDrawn < maxConnections; j++) {
+          const p2 = particles[j];
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 150) {
+          // Use squared distance to avoid expensive sqrt()
+          const distanceSq = dx * dx + dy * dy;
+
+          if (distanceSq < connectionDistanceSq) {
+            const distance = Math.sqrt(distanceSq);
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(65, 105, 225, ${0.15 * (1 - distance / 150)})`;
+            ctx.strokeStyle = `rgba(65, 105, 225, ${0.15 * (1 - distance / connectionDistance)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.stroke();
+            connectionsDrawn++;
           }
-        });
-      });
+        }
+      }
 
       animationFrameId = requestAnimationFrame(animate);
     };
@@ -92,3 +106,5 @@ export default function FloatingParticles() {
 
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none opacity-30" />;
 }
+
+export default memo(FloatingParticles);

@@ -235,7 +235,7 @@ export default function Home() {
           <div className="grid md:grid-cols-5 gap-16 items-start">
             <div className="md:col-span-3 space-y-6">
               <p className="text-gray-400 text-lg leading-relaxed">
-                I&apos;m a passionate Software Engineer with 4+ years of experience building high-performance web applications
+                I&apos;m a passionate Software Engineer building high-performance web applications
                 that drive business growth. My expertise spans the entire development lifecycle—from architecture design to
                 production deployment.
               </p>

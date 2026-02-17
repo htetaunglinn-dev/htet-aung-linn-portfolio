@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s | Htet Aung Linn",
   },
   description:
-    "Htet Aung Linn - Full Stack Developer specializing in React, Next.js, TypeScript, and modern web technologies. Experienced software engineer building scalable web applications.",
+    "I'm a passionate Software Engineer building high-performance web applications that drive business growth.",
   keywords: [
     "Htet Aung Linn",
     "Htet Aung Linn portfolio",
@@ -44,29 +44,44 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: [
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      {
+        url: "/favicon/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+    other: [{ rel: "icon", url: "/favicon/favicon.ico" }],
+  },
+  manifest: "/favicon/site.webmanifest",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://htet-aung-linn-portfolio.vercel.app",
     title: "Htet Aung Linn | Full Stack Developer & Software Engineer",
     description:
-      "Htet Aung Linn - Full Stack Developer specializing in React, Next.js, TypeScript, and modern web technologies. Experienced software engineer building scalable web applications.",
+      "I'm a passionate Software Engineer building high-performance web applications that drive business growth.",
     siteName: "Htet Aung Linn Portfolio",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
+        url: "/logo.png",
+        width: 512,
+        height: 512,
         alt: "Htet Aung Linn - Full Stack Developer",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Htet Aung Linn | Full Stack Developer & Software Engineer",
     description:
-      "Htet Aung Linn - Full Stack Developer specializing in React, Next.js, TypeScript, and modern web technologies.",
-    images: ["/og-image.jpg"],
+      "I'm a passionate Software Engineer building high-performance web applications that drive business growth.",
+    images: ["/logo.png"],
   },
   robots: {
     index: true,

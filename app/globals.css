@@ -3,7 +3,7 @@
 :root {
   --background: #0a0a0a;
   --foreground: #f5f5f5;
-  --primary: #4169E1;
+  --primary: #4169e1;
   --secondary: #3454b4;
   --accent: #5a7dee;
   --text-muted: #a0a0a0;
@@ -27,7 +27,11 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-family:
+    var(--font-inter),
+    system-ui,
+    -apple-system,
+    sans-serif;
   overflow-x: hidden;
 }
 
@@ -90,16 +94,224 @@ h3 {
 
 @keyframes shooting-star {
   0% {
-    transform: translate(0, 0) rotate(-45deg);
+    transform: translate(0, 0) rotate(10deg);
     opacity: 1;
   }
   70% {
     opacity: 1;
   }
   100% {
-    transform: translate(1000px, 1000px) rotate(-45deg);
+    transform: translate(800px, 800px) rotate(10deg);
     opacity: 0;
   }
+}
+
+/* CSS Star Field - single element, many stars via box-shadow */
+.star-field-layer-1,
+.star-field-layer-2,
+.star-field-layer-3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.star-field-layer-1 {
+  width: 2px;
+  height: 2px;
+  background: white;
+  box-shadow:
+    30vw 15vh 0 0 rgba(255, 255, 255, 0.9),
+    72vw 8vh 0 0 rgba(255, 255, 255, 0.8),
+    15vw 42vh 0 0 rgba(255, 255, 255, 0.85),
+    88vw 35vh 0 0 rgba(255, 255, 255, 0.9),
+    45vw 68vh 0 0 rgba(255, 255, 255, 0.7),
+    5vw 78vh 0 0 rgba(255, 255, 255, 0.85),
+    62vw 88vh 0 0 rgba(255, 255, 255, 0.8),
+    92vw 55vh 0 0 rgba(255, 255, 255, 0.75),
+    25vw 92vh 0 0 rgba(255, 255, 255, 0.9),
+    78vw 72vh 0 0 rgba(255, 255, 255, 0.8),
+    50vw 5vh 0 0 rgba(255, 255, 255, 0.85),
+    38vw 28vh 0 0 rgba(255, 255, 255, 0.7),
+    95vw 18vh 0 0 rgba(255, 255, 255, 0.9),
+    8vw 55vh 0 0 rgba(255, 255, 255, 0.8),
+    55vw 45vh 0 0 rgba(255, 255, 255, 0.75);
+  animation: twinkle-bright 4s ease-in-out infinite alternate;
+}
+
+.star-field-layer-2 {
+  width: 1px;
+  height: 1px;
+  background: white;
+  box-shadow:
+    10vw 20vh 0 0 rgba(255, 255, 255, 0.6),
+    22vw 5vh 0 0 rgba(255, 255, 255, 0.5),
+    35vw 75vh 0 0 rgba(255, 255, 255, 0.55),
+    48vw 30vh 0 0 rgba(255, 255, 255, 0.6),
+    60vw 12vh 0 0 rgba(255, 255, 255, 0.5),
+    75vw 50vh 0 0 rgba(255, 255, 255, 0.65),
+    85vw 80vh 0 0 rgba(255, 255, 255, 0.5),
+    12vw 65vh 0 0 rgba(255, 255, 255, 0.6),
+    42vw 90vh 0 0 rgba(255, 255, 255, 0.55),
+    68vw 40vh 0 0 rgba(255, 255, 255, 0.5),
+    3vw 35vh 0 0 rgba(255, 255, 255, 0.6),
+    90vw 70vh 0 0 rgba(255, 255, 255, 0.5),
+    28vw 58vh 0 0 rgba(255, 255, 255, 0.55),
+    53vw 15vh 0 0 rgba(255, 255, 255, 0.6),
+    82vw 25vh 0 0 rgba(255, 255, 255, 0.5),
+    18vw 85vh 0 0 rgba(255, 255, 255, 0.6),
+    65vw 62vh 0 0 rgba(255, 255, 255, 0.55),
+    40vw 48vh 0 0 rgba(255, 255, 255, 0.5),
+    97vw 42vh 0 0 rgba(255, 255, 255, 0.6),
+    7vw 10vh 0 0 rgba(255, 255, 255, 0.5);
+  animation: twinkle-medium 5s ease-in-out infinite alternate;
+}
+
+.star-field-layer-3 {
+  width: 1px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow:
+    5vw 8vh 0 0 rgba(255, 255, 255, 0.35),
+    14vw 32vh 0 0 rgba(255, 255, 255, 0.3),
+    20vw 72vh 0 0 rgba(255, 255, 255, 0.25),
+    32vw 18vh 0 0 rgba(255, 255, 255, 0.3),
+    44vw 55vh 0 0 rgba(255, 255, 255, 0.35),
+    56vw 78vh 0 0 rgba(255, 255, 255, 0.3),
+    67vw 22vh 0 0 rgba(255, 255, 255, 0.25),
+    76vw 65vh 0 0 rgba(255, 255, 255, 0.3),
+    84vw 10vh 0 0 rgba(255, 255, 255, 0.35),
+    93vw 48vh 0 0 rgba(255, 255, 255, 0.3),
+    2vw 90vh 0 0 rgba(255, 255, 255, 0.25),
+    16vw 50vh 0 0 rgba(255, 255, 255, 0.3),
+    26vw 38vh 0 0 rgba(255, 255, 255, 0.35),
+    37vw 82vh 0 0 rgba(255, 255, 255, 0.3),
+    49vw 42vh 0 0 rgba(255, 255, 255, 0.25),
+    58vw 28vh 0 0 rgba(255, 255, 255, 0.3),
+    70vw 95vh 0 0 rgba(255, 255, 255, 0.35),
+    80vw 38vh 0 0 rgba(255, 255, 255, 0.3),
+    89vw 85vh 0 0 rgba(255, 255, 255, 0.25),
+    96vw 30vh 0 0 rgba(255, 255, 255, 0.3),
+    11vw 15vh 0 0 rgba(255, 255, 255, 0.35),
+    24vw 62vh 0 0 rgba(255, 255, 255, 0.3),
+    33vw 95vh 0 0 rgba(255, 255, 255, 0.25),
+    41vw 8vh 0 0 rgba(255, 255, 255, 0.3),
+    52vw 52vh 0 0 rgba(255, 255, 255, 0.35),
+    63vw 35vh 0 0 rgba(255, 255, 255, 0.3),
+    74vw 82vh 0 0 rgba(255, 255, 255, 0.25),
+    86vw 58vh 0 0 rgba(255, 255, 255, 0.3),
+    91vw 15vh 0 0 rgba(255, 255, 255, 0.35),
+    8vw 45vh 0 0 rgba(255, 255, 255, 0.3);
+}
+
+@keyframes twinkle-bright {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes twinkle-medium {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/* Shooting star with sparkle trail */
+.shooting-star-sparkle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  box-shadow:
+    0 0 10px 3px rgba(255, 255, 255, 0.8),
+    0 0 25px 6px rgba(65, 105, 225, 0.5);
+}
+
+/* Sparkle particles behind the star */
+.shooting-star-sparkle::before,
+.shooting-star-sparkle::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  animation: sparkle-fade 0.6s ease-out infinite;
+}
+
+.shooting-star-sparkle::before {
+  width: 3px;
+  height: 3px;
+  top: -8px;
+  left: -8px;
+  box-shadow:
+    -10px -10px 0 0 rgba(255, 255, 255, 0.5),
+    -22px -22px 0 0 rgba(255, 255, 255, 0.3),
+    -16px -18px 0 -1px rgba(65, 105, 225, 0.4),
+    -32px -34px 0 -1px rgba(255, 255, 255, 0.15);
+  animation-delay: 0s;
+}
+
+.shooting-star-sparkle::after {
+  width: 2px;
+  height: 2px;
+  top: -5px;
+  left: -5px;
+  box-shadow:
+    -6px -8px 0 0 rgba(255, 255, 255, 0.4),
+    -18px -16px 0 0 rgba(65, 105, 225, 0.35),
+    -28px -26px 0 -1px rgba(255, 255, 255, 0.2),
+    -12px -14px 0 0 rgba(255, 255, 255, 0.35);
+  animation-delay: 0.3s;
+}
+
+@keyframes sparkle-fade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Black hole glow pulse */
+@keyframes accretion-glow {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Accretion disk rotation with glow */
+@keyframes accretion-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.accretion-disk {
+  animation: accretion-spin 20s linear infinite;
+}
+
+.accretion-glow {
+  animation: accretion-glow 4s ease-in-out infinite;
 }
 
 .animate-float {

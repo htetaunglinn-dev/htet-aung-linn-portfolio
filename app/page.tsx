@@ -13,7 +13,6 @@ import { PROJECTS } from './project-data.const';
 export default function Home() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [revealedContacts, setRevealedContacts] = useState<Record<string, boolean>>({});
-  const [stars, setStars] = useState<Array<{ top: number; left: number; size: 'lg' | 'md' | 'sm'; duration: number; delay: number; opacity?: number }>>([]);
   const [shootingStars, setShootingStars] = useState<Array<{ top: number; left: number; duration: number; delay: number }>>([]);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -24,44 +23,12 @@ export default function Home() {
   useEffect(() => {
     setIsMounted(true);
 
-    // Generate stars on client side only
-    // Reduced from 120 to 40 total stars for better performance
-    const generatedStars = [
-      // Large stars (only 4 animated for subtle effect)
-      ...Array.from({ length: 4 }, () => ({
-        top: Math.random() * 100,
-        left: Math.random() * 100,
-        size: 'lg' as const,
-        duration: 2 + Math.random() * 3,
-        delay: Math.random() * 5,
-      })),
-      // Medium stars (static, no pulse animation)
-      ...Array.from({ length: 12 }, () => ({
-        top: Math.random() * 100,
-        left: Math.random() * 100,
-        size: 'md' as const,
-        duration: 0,
-        delay: 0,
-        opacity: 0.6 + Math.random() * 0.4,
-      })),
-      // Small stars
-      ...Array.from({ length: 14 }, () => ({
-        top: Math.random() * 100,
-        left: Math.random() * 100,
-        size: 'sm' as const,
-        duration: 0,
-        delay: 0,
-        opacity: 0.3 + Math.random() * 0.3,
-      })),
-    ];
-    setStars(generatedStars);
-
-    // Generate shooting stars
-    const generatedShootingStars = Array.from({ length: 2 }, (_, i) => ({
-      top: Math.random() * 50,
-      left: -10 + Math.random() * 20,
-      duration: 6 + Math.random() * 4,
-      delay: i * 15,
+    // Generate shooting stars (3 with staggered delays)
+    const generatedShootingStars = Array.from({ length: 3 }, (_, i) => ({
+      top: Math.random() * 40,
+      left: -5 + Math.random() * 15,
+      duration: 4 + Math.random() * 3,
+      delay: i * 8,
     }));
     setShootingStars(generatedShootingStars);
   }, []);
@@ -98,43 +65,27 @@ export default function Home() {
           {/* Background Gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
 
-          {/* Nebula/Galaxy Clouds - Reduced from 3 to 2 and removed animation for performance */}
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.15),rgba(138,43,226,0.1),transparent_70%)] blur-3xl" />
-            <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(138,43,226,0.12),rgba(65,105,225,0.08),transparent_70%)] blur-3xl" />
+          {/* Nebula/Galaxy Clouds - visible cosmic colors */}
+          <div className="absolute inset-0 opacity-50">
+            <div className="absolute top-[-10%] right-[10%] w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.2),rgba(138,43,226,0.12),transparent_70%)] blur-3xl" />
+            <div className="absolute bottom-[-5%] left-[5%] w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_center,rgba(138,43,226,0.15),rgba(65,105,225,0.1),transparent_70%)] blur-3xl" />
+            <div className="absolute top-[30%] left-[40%] w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(88,60,180,0.1),transparent_70%)] blur-3xl" />
           </div>
 
-          {/* Starfield Layers - Fixed (No Parallax) */}
-          <div className="absolute inset-0 opacity-40" style={{ transform: 'translateZ(0)' }}>
-            {stars.map((star, i) => (
-              <div
-                key={`star-${star.size}-${i}`}
-                className={`absolute bg-white rounded-full ${
-                  star.size === 'lg' ? 'w-1 h-1 animate-pulse' :
-                  star.size === 'md' ? 'w-0.5 h-0.5 animate-pulse' :
-                  'w-px h-px'
-                }`}
-                style={{
-                  top: `${star.top}%`,
-                  left: `${star.left}%`,
-                  transform: 'translate3d(0, 0, 0)',
-                  ...(star.duration > 0 && {
-                    animationDuration: `${star.duration}s`,
-                    animationDelay: `${star.delay}s`,
-                  }),
-                  ...(star.opacity !== undefined && { opacity: star.opacity }),
-                }}
-              />
-            ))}
+          {/* CSS Star Field - 3 layers, ~65 stars, only 3 DOM nodes */}
+          <div className="absolute inset-0" style={{ transform: 'translateZ(0)' }}>
+            <div className="star-field-layer-1" />
+            <div className="star-field-layer-2" />
+            <div className="star-field-layer-3" />
           </div>
 
-          {/* Shooting Stars - Fixed (No Parallax) */}
+          {/* Shooting Stars with sparkle trails */}
           {isMounted && (
             <div className="absolute inset-0 overflow-hidden">
               {shootingStars.map((star, i) => (
                 <div
                   key={`shooting-${i}`}
-                  className="absolute w-1 h-1 bg-white rounded-full"
+                  className="shooting-star-sparkle"
                   style={{
                     top: `${star.top}%`,
                     left: `${star.left}%`,
@@ -143,27 +94,41 @@ export default function Home() {
                     animationTimingFunction: 'ease-in',
                     animationIterationCount: 'infinite',
                     animationDelay: `${star.delay}s`,
-                    boxShadow: '0 0 4px 2px rgba(255,255,255,0.3)',
                   }}
                 />
               ))}
             </div>
           )}
 
-          {/* Black Hole Effect */}
-          <div className="absolute top-1/4 right-[15%] w-64 h-64 hidden lg:block">
+          {/* Black Hole Effect - larger, more visible */}
+          <div className="absolute top-[15%] right-[10%] w-96 h-96 hidden lg:block">
             <div className="relative w-full h-full">
-              {/* Event Horizon */}
-              <div className="absolute inset-0 rounded-full bg-black border-2 border-[#4169E1]/30" />
+              {/* Deep space void */}
+              <div className="absolute inset-[15%] rounded-full bg-black z-10" />
 
-              {/* Accretion Disk - single slow rotation for subtle effect */}
-              <div className="absolute inset-0 rounded-full">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent blur-xl animate-spin" style={{ animationDuration: '25s' }} />
+              {/* Event Horizon glow */}
+              <div className="absolute inset-[12%] rounded-full border-2 border-[#4169E1]/40 z-10 shadow-[0_0_30px_rgba(65,105,225,0.3),inset_0_0_30px_rgba(65,105,225,0.2)]" />
+
+              {/* Accretion Disk - outer ring */}
+              <div className="absolute inset-0 rounded-full accretion-disk">
+                <div className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,transparent,rgba(65,105,225,0.4),rgba(138,43,226,0.3),transparent,rgba(65,105,225,0.3),transparent)] blur-md" />
               </div>
 
-              {/* Gravitational Lensing Effect - static rings */}
-              <div className="absolute -inset-8 rounded-full border border-[#4169E1]/10" />
-              <div className="absolute -inset-16 rounded-full border border-[#4169E1]/5" />
+              {/* Accretion Disk - inner glow ring */}
+              <div className="absolute inset-[5%] rounded-full accretion-disk" style={{ animationDirection: 'reverse', animationDuration: '15s' }}>
+                <div className="absolute inset-0 rounded-full bg-[conic-gradient(from_180deg,transparent,rgba(90,125,238,0.5),rgba(138,43,226,0.25),transparent)] blur-sm" />
+              </div>
+
+              {/* Gravitational Lensing - glowing rings */}
+              <div className="absolute -inset-6 rounded-full border border-[#4169E1]/20 shadow-[0_0_15px_rgba(65,105,225,0.1)]" />
+              <div className="absolute -inset-12 rounded-full border border-[#4169E1]/10 shadow-[0_0_10px_rgba(65,105,225,0.05)]" />
+              <div className="absolute -inset-20 rounded-full border border-[#4169E1]/5" />
+
+              {/* Light bending streaks near the horizon */}
+              <div className="absolute inset-[-2%] rounded-full accretion-glow">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[8px] bg-gradient-to-r from-transparent via-[#4169E1]/30 to-transparent blur-sm rounded-full" />
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60%] h-[8px] bg-gradient-to-r from-transparent via-[#5a7dee]/25 to-transparent blur-sm rounded-full" />
+              </div>
             </div>
           </div>
 

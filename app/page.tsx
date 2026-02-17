@@ -27,25 +27,25 @@ export default function Home() {
     // Generate stars on client side only
     // Reduced from 120 to 40 total stars for better performance
     const generatedStars = [
-      // Large stars
-      ...Array.from({ length: 8 }, () => ({
+      // Large stars (only 4 animated for subtle effect)
+      ...Array.from({ length: 4 }, () => ({
         top: Math.random() * 100,
         left: Math.random() * 100,
         size: 'lg' as const,
         duration: 2 + Math.random() * 3,
         delay: Math.random() * 5,
       })),
-      // Medium stars
-      ...Array.from({ length: 15 }, () => ({
+      // Medium stars (static, no pulse animation)
+      ...Array.from({ length: 12 }, () => ({
         top: Math.random() * 100,
         left: Math.random() * 100,
         size: 'md' as const,
-        duration: 1.5 + Math.random() * 2,
-        delay: Math.random() * 3,
+        duration: 0,
+        delay: 0,
         opacity: 0.6 + Math.random() * 0.4,
       })),
       // Small stars
-      ...Array.from({ length: 17 }, () => ({
+      ...Array.from({ length: 14 }, () => ({
         top: Math.random() * 100,
         left: Math.random() * 100,
         size: 'sm' as const,
@@ -154,17 +154,16 @@ export default function Home() {
           <div className="absolute top-1/4 right-[15%] w-64 h-64 hidden lg:block">
             <div className="relative w-full h-full">
               {/* Event Horizon */}
-              <div className="absolute inset-0 rounded-full bg-black border-2 border-[#4169E1]/30 animate-pulse" style={{ animationDuration: '3s' }} />
+              <div className="absolute inset-0 rounded-full bg-black border-2 border-[#4169E1]/30" />
 
-              {/* Accretion Disk */}
+              {/* Accretion Disk - single slow rotation for subtle effect */}
               <div className="absolute inset-0 rounded-full">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent blur-xl animate-spin" style={{ animationDuration: '20s' }} />
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-[#8a2be2]/15 to-transparent blur-xl animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent blur-xl animate-spin" style={{ animationDuration: '25s' }} />
               </div>
 
-              {/* Gravitational Lensing Effect */}
-              <div className="absolute -inset-8 rounded-full border border-[#4169E1]/10 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.5s' }} />
-              <div className="absolute -inset-16 rounded-full border border-[#4169E1]/5 animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
+              {/* Gravitational Lensing Effect - static rings */}
+              <div className="absolute -inset-8 rounded-full border border-[#4169E1]/10" />
+              <div className="absolute -inset-16 rounded-full border border-[#4169E1]/5" />
             </div>
           </div>
 
@@ -574,7 +573,7 @@ export default function Home() {
 
           <div className="pt-8 border-t border-[#4169E1]/10 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-gray-400 text-sm">
-              &copy; 2025 Htet Aung Linn. All rights reserved.
+              &copy; {new Date().getFullYear()} Htet Aung Linn. All rights reserved.
             </p>
             <p className="text-gray-500 text-sm">
               Built with Next.js, TypeScript & Tailwind CSS

@@ -41,7 +41,12 @@ export default function Navigation() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const navHeight = 72; // Fixed nav height offset
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: sectionId === 'home' ? 0 : elementPosition - navHeight,
+        behavior: 'smooth',
+      });
     }
   };
 

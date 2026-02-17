@@ -71,7 +71,7 @@ export default function TechStackCarousel() {
                     key={`${tech.name}-${index}`}
                     className="flex-shrink-0"
                   >
-                    <div className="w-24 h-24 bg-black/40 backdrop-blur-md border border-[#4A6FFF]/20 rounded-2xl p-5 shadow-lg shadow-[#4A6FFF]/30 flex items-center justify-center">
+                    <div className="w-24 h-24 bg-[#0a0a0a]/90 border border-[#4A6FFF]/20 rounded-2xl p-5 shadow-lg shadow-[#4A6FFF]/30 flex items-center justify-center">
                       <Icon className="w-full h-full text-white opacity-80" />
                     </div>
                   </div>

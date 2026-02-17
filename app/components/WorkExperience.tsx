@@ -233,7 +233,7 @@ export default function WorkExperience() {
           ].map((stat, index) => (
             <div
               key={index}
-              className="bg-black/40 backdrop-blur-md border border-[#4A6FFF]/10 rounded-2xl p-6 text-center hover:border-[#4A6FFF]/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#4A6FFF]/10"
+              className="bg-[#0a0a0a]/80 border border-[#4A6FFF]/10 rounded-2xl p-6 text-center hover:border-[#4A6FFF]/30 transition-colors duration-300"
             >
               <div className="text-3xl md:text-4xl font-bold text-[#4A6FFF] mb-2">
                 {stat.value}

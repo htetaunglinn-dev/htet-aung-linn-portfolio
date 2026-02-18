@@ -181,7 +181,7 @@ export default function WorkExperience() {
   return (
     <section
       id="experience"
-      className={`py-40 px-6 relative transition-all duration-1000 ${
+      className={`py-20 md:py-40 px-6 relative transition-all duration-1000 ${
         sectionVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-10"
@@ -189,7 +189,7 @@ export default function WorkExperience() {
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-10 md:mb-20">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
             Work Experience
           </h2>
@@ -201,7 +201,7 @@ export default function WorkExperience() {
         </div>
 
         {/* Timeline */}
-        <div className="space-y-16 md:space-y-20">
+        <div className="space-y-10 md:space-y-20">
           {workExperience.map((job, index) => (
             <WorkExperienceCard
               key={index}
@@ -215,7 +215,7 @@ export default function WorkExperience() {
         {/* Stats Section */}
         <div
           id="experience-stats"
-          className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="mt-12 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-6"
         >
           {[
             { value: counts.years, suffix: "+", label: "Years Experience" },

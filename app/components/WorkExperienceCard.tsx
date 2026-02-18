@@ -90,7 +90,7 @@ export default function WorkExperienceCard({
 
         {/* Right Column - Main Content */}
         <div className="md:col-span-2">
-          <div className="group bg-black/40 backdrop-blur-md border border-[#4A6FFF]/10 rounded-2xl p-8 hover:border-[#4A6FFF]/30 transition-all duration-500 hover:shadow-2xl hover:shadow-[#4A6FFF]/10 hover:-translate-y-1">
+          <div className="group bg-black/40 backdrop-blur-md border border-[#4A6FFF]/10 rounded-2xl p-5 md:p-8 hover:border-[#4A6FFF]/30 transition-all duration-500 hover:shadow-2xl hover:shadow-[#4A6FFF]/10 hover:-translate-y-1">
             {/* Mobile - Logo and Date */}
             <div className="md:hidden mb-6 flex items-start justify-between">
               <div className="flex items-center gap-4">

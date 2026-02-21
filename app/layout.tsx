@@ -69,19 +69,19 @@ export const metadata: Metadata = {
     siteName: "Htet Aung Linn Portfolio",
     images: [
       {
-        url: "/logo.png",
-        width: 512,
-        height: 512,
+        url: "/profile.jpg",
+        width: 960,
+        height: 960,
         alt: "Htet Aung Linn - Full Stack Developer",
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Htet Aung Linn | Full Stack Developer & Software Engineer",
     description:
       "I'm a passionate Software Engineer building high-performance web applications that drive business growth.",
-    images: ["/logo.png"],
+    images: ["/profile.jpg"],
   },
   robots: {
     index: true,

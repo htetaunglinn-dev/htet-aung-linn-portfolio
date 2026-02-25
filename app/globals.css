@@ -33,6 +33,7 @@ body {
     -apple-system,
     sans-serif;
   overflow-x: hidden;
+  user-select: none;
 }
 
 /* Parallax Layer Performance */

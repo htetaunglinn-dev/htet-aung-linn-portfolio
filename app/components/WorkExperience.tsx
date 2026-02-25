@@ -184,7 +184,7 @@ export default function WorkExperience() {
       className={`py-20 md:py-40 px-6 relative transition-all duration-1000 ${
         sectionVisible
           ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-10"
+          : "md:opacity-0 md:translate-y-10"
       }`}
     >
       <div className="max-w-7xl mx-auto">

@@ -254,7 +254,7 @@ export default function Home() {
           className={`py-20 md:py-40 px-6 relative transition-all duration-1000 ${
             isVisible.about
               ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
+              : "md:opacity-0 md:translate-y-10"
           }`}
         >
           {/* Subtle Lighting Effect */}
@@ -338,7 +338,7 @@ export default function Home() {
           className={`py-20 md:py-40 px-6 bg-gradient-to-b from-[#0a0a0a] to-black relative transition-all duration-1000 ${
             isVisible.projects
               ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
+              : "md:opacity-0 md:translate-y-10"
           }`}
         >
           {/* Subtle Lighting Effects - Reduced from 3 to 1 for performance */}
@@ -423,7 +423,7 @@ export default function Home() {
           className={`py-20 md:py-40 px-6 relative transition-all duration-1000 ${
             isVisible.contact
               ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
+              : "md:opacity-0 md:translate-y-10"
           }`}
         >
           {/* Subtle Lighting Effects - Reduced from 3 to 1 for performance */}

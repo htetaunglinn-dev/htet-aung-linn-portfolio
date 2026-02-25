@@ -57,7 +57,7 @@ export default function WorkExperienceCard({
     <div
       id={`experience-card-${index}`}
       className={`relative transition-all duration-700 ease-out ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        isVisible ? "opacity-100 translate-y-0" : "md:opacity-0 md:translate-y-10"
       }`}
       style={{
         transitionDelay: `${index * 150}ms`,

@@ -9,8 +9,16 @@ import WorkExperience from "./components/WorkExperience";
 import TechStackCarousel from "./components/TechStackCarousel";
 import SecureExternalLink from "./components/SecureExternalLink";
 import { PROJECTS } from "./project-data.const";
+import { useCountUp } from "./hooks/useCountUp";
+
+const CAREER_START_YEAR = 2022;
 
 export default function Home() {
+  const yearsExperience = new Date().getFullYear() - CAREER_START_YEAR;
+  const yearsCount = useCountUp(yearsExperience);
+  const projectsCount = useCountUp(50);
+  const satisfactionCount = useCountUp(98);
+
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [revealedContacts, setRevealedContacts] = useState<
     Record<string, boolean>
@@ -159,7 +167,7 @@ export default function Home() {
           {/* Floating Stats Cards */}
           <div className="absolute top-1/4 left-[8%] z-20 animate-float hidden lg:block">
             <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
-              <p className="text-4xl font-bold text-[#4169E1] mb-1">4+</p>
+              <p className="text-4xl font-bold text-[#4169E1] mb-1">{yearsCount}+</p>
               <p className="text-xs text-gray-400 tracking-wide">
                 Years Experience
               </p>
@@ -168,7 +176,7 @@ export default function Home() {
 
           <div className="absolute bottom-1/4 right-[8%] z-20 animate-float-delayed hidden lg:block">
             <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
-              <p className="text-4xl font-bold text-[#4169E1] mb-1">50+</p>
+              <p className="text-4xl font-bold text-[#4169E1] mb-1">{projectsCount}+</p>
               <p className="text-xs text-gray-400 tracking-wide">
                 Projects Delivered
               </p>
@@ -180,7 +188,7 @@ export default function Home() {
             style={{ animationDelay: "0.5s" }}
           >
             <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
-              <p className="text-4xl font-bold text-[#4169E1] mb-1">98%</p>
+              <p className="text-4xl font-bold text-[#4169E1] mb-1">{satisfactionCount}%</p>
               <p className="text-xs text-gray-400 tracking-wide">
                 Client Satisfaction
               </p>
@@ -213,7 +221,7 @@ export default function Home() {
               <br className="hidden md:block" />
               elegant architecture, and meticulous attention to detail
             </p>
-            <div className="flex gap-4 justify-center flex-wrap">
+            <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
               <a
                 href="#projects"
                 className="group px-8 py-4 md:px-10 bg-[#4169E1] hover:bg-[#3454b4] text-white rounded-lg transition-all duration-300 hover:scale-105 font-semibold shadow-2xl shadow-[#4169E1]/20"
@@ -355,10 +363,10 @@ export default function Home() {
                 >
                   <ParallaxCard
                     intensity={10}
-                    className="group relative bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 h-full flex flex-col"
+                    className="group relative bg-black/40 backdrop-blur-sm border border-[#4169E1]/30 lg:border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 h-full flex flex-col"
                   >
                     {/* Thumbnail Placeholder */}
-                    <div className="relative w-full h-48 bg-gradient-to-br from-[#4169E1]/10 to-[#4169E1]/5 rounded-xl mb-6 border border-[#4169E1]/10 group-hover:border-[#4169E1]/30 transition-colors overflow-hidden shrink-0">
+                    <div className="relative w-full h-48 bg-gradient-to-br from-[#4169E1]/10 to-[#4169E1]/5 rounded-xl mb-6 border border-[#4169E1]/30 lg:border-[#4169E1]/10 group-hover:border-[#4169E1]/30 transition-colors overflow-hidden shrink-0">
                       <Image
                         src={project.image}
                         alt={`${project.title} project preview`}
@@ -532,7 +540,7 @@ export default function Home() {
                   landing page, I&apos;m here to help bring your vision to life
                   with clean code and elegant solutions.
                 </p>
-                <div className="flex gap-4 justify-center flex-wrap">
+                <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
                   <a
                     href="mailto:htaunglin@gmail.com"
                     className="group inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 bg-[#4169E1] hover:bg-[#3454b4] text-white rounded-xl transition-all duration-300 hover:scale-105 font-bold text-base md:text-lg shadow-2xl shadow-[#4169E1]/20"

@@ -223,7 +223,7 @@ h3 {
   }
 }
 
-/* Shooting star with sparkle trail */
+/* Shooting star with blinking head */
 .shooting-star-sparkle {
   position: absolute;
   width: 5px;
@@ -233,56 +233,36 @@ h3 {
   box-shadow:
     0 0 10px 3px rgba(255, 255, 255, 0.8),
     0 0 25px 6px rgba(65, 105, 225, 0.5);
+  animation: star-blink 0.4s ease-in-out infinite;
 }
 
-/* Sparkle particles behind the star */
-.shooting-star-sparkle::before,
-.shooting-star-sparkle::after {
+/* Motion blur trail */
+.shooting-star-sparkle::before {
   content: "";
   position: absolute;
-  border-radius: 50%;
-  background: white;
-  animation: sparkle-fade 0.6s ease-out infinite;
-}
-
-.shooting-star-sparkle::before {
-  width: 3px;
-  height: 3px;
-  top: -8px;
-  left: -8px;
-  box-shadow:
-    -10px -10px 0 0 rgba(255, 255, 255, 0.5),
-    -22px -22px 0 0 rgba(255, 255, 255, 0.3),
-    -16px -18px 0 -1px rgba(65, 105, 225, 0.4),
-    -32px -34px 0 -1px rgba(255, 255, 255, 0.15);
-  animation-delay: 0s;
-}
-
-.shooting-star-sparkle::after {
-  width: 2px;
+  width: 90px;
   height: 2px;
-  top: -5px;
-  left: -5px;
-  box-shadow:
-    -6px -8px 0 0 rgba(255, 255, 255, 0.4),
-    -18px -16px 0 0 rgba(65, 105, 225, 0.35),
-    -28px -26px 0 -1px rgba(255, 255, 255, 0.2),
-    -12px -14px 0 0 rgba(255, 255, 255, 0.35);
-  animation-delay: 0.3s;
+  top: 50%;
+  left: 50%;
+  transform-origin: left center;
+  transform: rotate(-135deg) translateY(-50%);
+  background: linear-gradient(to left, transparent, rgba(65, 105, 225, 0.2), rgba(255, 255, 255, 0.45));
+  filter: blur(2px);
+  border-radius: 2px;
 }
 
-@keyframes sparkle-fade {
-  0% {
+@keyframes star-blink {
+  0%, 100% {
     opacity: 1;
-    transform: scale(1);
+    box-shadow:
+      0 0 10px 3px rgba(255, 255, 255, 0.8),
+      0 0 25px 6px rgba(65, 105, 225, 0.5);
   }
   50% {
-    opacity: 0.3;
-    transform: scale(0.5);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+    opacity: 0.2;
+    box-shadow:
+      0 0 4px 1px rgba(255, 255, 255, 0.3),
+      0 0 10px 2px rgba(65, 105, 225, 0.2);
   }
 }
 

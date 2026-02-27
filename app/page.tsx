@@ -40,7 +40,7 @@ export default function Home() {
       top: Math.random() * 40,
       left: -5 + Math.random() * 15,
       duration: 4 + Math.random() * 3,
-      delay: i * 8,
+      delay: -(i * 8),
     }));
     setShootingStars(generatedShootingStars);
   }, []);

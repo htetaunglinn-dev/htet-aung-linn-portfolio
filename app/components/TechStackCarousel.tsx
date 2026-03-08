@@ -14,12 +14,12 @@ import {
   SiTailwindcss,
   SiRedux,
   SiDocker,
-  SiAwsamplify,
   SiGit,
   SiLinux,
   SiNginx,
   SiMysql
 } from 'react-icons/si';
+import { FaAws } from 'react-icons/fa6';
 import { IconType } from 'react-icons';
 
 interface TechLogo {
@@ -41,7 +41,7 @@ const techLogos: TechLogo[] = [
   { name: 'Tailwind CSS', Icon: SiTailwindcss },
   { name: 'Redux', Icon: SiRedux },
   { name: 'Docker', Icon: SiDocker },
-  { name: 'AWS', Icon: SiAwsamplify },
+  { name: 'AWS', Icon: FaAws },
   { name: 'Git', Icon: SiGit },
   { name: 'Linux', Icon: SiLinux },
   { name: 'Nginx', Icon: SiNginx },

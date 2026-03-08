@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { easeOutCubic } from '@/app/lib/easing';
 
 export function useCountUp(target: number, duration: number = 1800, delay: number = 400) {
   const [count, setCount] = useState(0);
@@ -12,8 +13,7 @@ export function useCountUp(target: number, duration: number = 1800, delay: numbe
       const animate = (currentTime: number) => {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        // Ease-out cubic
-        const eased = 1 - Math.pow(1 - progress, 3);
+        const eased = easeOutCubic(progress);
         setCount(Math.round(eased * target));
 
         if (progress < 1) {

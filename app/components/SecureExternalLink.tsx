@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, AnchorHTMLAttributes } from "react";
+import { isValidUrl } from "@/app/lib/url-utils";
 
 interface SecureExternalLinkProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "target" | "rel"> {
@@ -37,16 +38,6 @@ export default function SecureExternalLink({
   openInNewTab = true,
   ...props
 }: SecureExternalLinkProps) {
-  // Validate URL
-  const isValidUrl = (url: string): boolean => {
-    try {
-      const urlObj = new URL(url);
-      return urlObj.protocol === "http:" || urlObj.protocol === "https:";
-    } catch {
-      return false;
-    }
-  };
-
   // If URL is invalid, render as span with warning
   if (!isValidUrl(href)) {
     console.warn(`SecureExternalLink: Invalid URL provided: ${href}`);

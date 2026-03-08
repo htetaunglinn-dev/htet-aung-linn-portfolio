@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { getScrollTarget } from '@/app/lib/scroll-utils';
 
 export default function Navigation() {
   const [activeSection, setActiveSection] = useState('home');
@@ -43,8 +44,9 @@ export default function Navigation() {
     if (element) {
       const navHeight = 72; // Fixed nav height offset
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const target = getScrollTarget(sectionId, elementPosition, navHeight);
       window.scrollTo({
-        top: sectionId === 'home' ? 0 : elementPosition - navHeight,
+        top: target,
         behavior: 'smooth',
       });
     }

@@ -21,7 +21,7 @@ const workExperience: WorkExperienceItem[] = [
     companyUrl: "https://www.gofive.co.th/",
     logo: "https://res.cloudinary.com/htetaunglinn-dev/image/upload/v1739081714/Portfolio%20Next%20JS%202025/logo/3.png",
     position: "Software Engineer",
-    period: "January 2024 - Present",
+    period: "January 2024 - February 2026",
     location: "Bangkok, Thailand",
     description:
       "Leading end-to-end development of enterprise CRM system from concept to production deployment. Driving technical excellence through performance optimization, mentorship, and data-driven architectural decisions that directly impact user experience and business metrics.",

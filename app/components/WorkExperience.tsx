@@ -17,6 +17,36 @@ interface WorkExperienceItem {
 
 const workExperience: WorkExperienceItem[] = [
   {
+    company: "Famoulee",
+    companyUrl: "https://famoulee.com/en",
+    logo: "https://res.cloudinary.com/htetaunglinn-dev/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1781797863/Portfolio%20Next%20JS%202025/logo/dw5vu0pxyrekdk2c5ftm.svg",
+    position: "Software Engineer",
+    period: "March 2026 - Present",
+    location: "Remote, Germany",
+    description:
+      "Contributing to Famoulee, a multilingual family-relationship platform for preserving memories, building family trees, and connecting loved ones across web and mobile. Ship production features across the Next.js frontend, Node.js API, and Flutter app—from profile and media workflows to real-time presence, tribute experiences, and pre-launch release preparation.",
+    achievements: [
+      "Built profile and media editing flows including photo upload, crop UI, and document image updates, improving reliability of biographic and multi-document uploads across the platform",
+      "Expanded internationalization with German and Spanish translations and locale routing fixes, delivering a consistent multilingual experience across registration, settings, and core user journeys",
+      "Delivered family-tree, panorama, and candle-light tribute features while fixing online-status, API duplication, and responsive auth flows during multi-day production release cycles",
+    ],
+    techStack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Redux Toolkit",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Flutter",
+      "Socket.io",
+      "LiveKit",
+      "Firebase",
+      "Stripe",
+    ],
+  },
+  {
     company: "GoFive",
     companyUrl: "https://www.gofive.co.th/",
     logo: "https://res.cloudinary.com/htetaunglinn-dev/image/upload/v1739081714/Portfolio%20Next%20JS%202025/logo/3.png",

@@ -21,7 +21,7 @@ const workExperience: WorkExperienceItem[] = [
     companyUrl: "https://famoulee.com/en",
     logo: "https://res.cloudinary.com/htetaunglinn-dev/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1781797863/Portfolio%20Next%20JS%202025/logo/dw5vu0pxyrekdk2c5ftm.svg",
     position: "Software Engineer",
-    period: "March 2026 - Present",
+    period: "May 2026 - Present",
     location: "Remote, Germany",
     description:
       "Contributing to Famoulee, a multilingual family-relationship platform for preserving memories, building family trees, and connecting loved ones across web and mobile. Ship production features across the Next.js frontend, Node.js API, and Flutter app—from profile and media workflows to real-time presence, tribute experiences, and pre-launch release preparation.",
@@ -54,7 +54,7 @@ const workExperience: WorkExperienceItem[] = [
     period: "January 2024 - February 2026",
     location: "Bangkok, Thailand",
     description:
-      "Leading end-to-end development of enterprise CRM system from concept to production deployment. Driving technical excellence through performance optimization, mentorship, and data-driven architectural decisions that directly impact user experience and business metrics.",
+      "Led end-to-end development of an enterprise CRM system from concept to production deployment, driving technical excellence through performance optimization, mentorship, and data-driven architectural decisions that directly impact user experience and business metrics.",
     achievements: [
       "Led end-to-end development of enterprise CRM from concept to production, collaborating directly with stakeholders and delivering 15% performance gains through strategic optimization",
       "Mentored 3 junior developers on Angular and TypeScript best practices, accelerating team velocity by 25% while establishing scalable architecture patterns",

@@ -54,7 +54,7 @@ const workExperience: WorkExperienceItem[] = [
     period: "January 2024 - February 2026",
     location: "Bangkok, Thailand",
     description:
-      "Leading end-to-end development of enterprise CRM system from concept to production deployment. Driving technical excellence through performance optimization, mentorship, and data-driven architectural decisions that directly impact user experience and business metrics.",
+      "Led end-to-end development of an enterprise CRM system from concept to production deployment, driving technical excellence through performance optimization, mentorship, and data-driven architectural decisions that directly impact user experience and business metrics.",
     achievements: [
       "Led end-to-end development of enterprise CRM from concept to production, collaborating directly with stakeholders and delivering 15% performance gains through strategic optimization",
       "Mentored 3 junior developers on Angular and TypeScript best practices, accelerating team velocity by 25% while establishing scalable architecture patterns",

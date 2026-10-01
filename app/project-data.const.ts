@@ -4,7 +4,7 @@ export const PROJECTS = [
     description:
       "Real-time crypto analytics platform providing AI-driven market insights and trend analysis.",
     tags: ["Next.js", "Python", "TensorFlow"],
-    impact: "+200% efficiency",
+    impact: "AI market insights",
     image: "/project-1.webp",
     link: "https://crypto-ai-analysis.vercel.app/",
   },
@@ -13,7 +13,7 @@ export const PROJECTS = [
     description:
       "Premium outdoor and camping equipment e-commerce platform for adventure enthusiasts.",
     tags: ["React", "Node.js", "Stripe"],
-    impact: "$500K+ revenue",
+    impact: "Stripe checkout",
     image: "/project-2.webp",
     link: "https://forest-queen-ecommerce.vercel.app/",
   },
@@ -22,7 +22,7 @@ export const PROJECTS = [
     description:
       "The ultimate social platform connecting developers to share knowledge and insights.",
     tags: ["Next.js", "PostgreSQL", "AWS"],
-    impact: "10K+ users",
+    impact: "Developer community",
     image: "/project-3.webp",
     link: "https://dev-env-bkk.vercel.app/",
   },
@@ -31,7 +31,7 @@ export const PROJECTS = [
     description:
       "Your personal healthcare concierge for priority scheduling and medical coordination.",
     tags: ["React", "Socket.io", "Redis"],
-    impact: "5K+ teams",
+    impact: "Real-time scheduling",
     image: "/project-4.webp",
     link: "https://healthpass-bkk.vercel.app/",
   },
@@ -40,7 +40,7 @@ export const PROJECTS = [
     description:
       "Comprehensive logistics solution for tracking global shipments and supply chain management.",
     tags: ["Next.js", "WebSocket", "MongoDB"],
-    impact: "$2M+ volume",
+    impact: "Live shipment tracking",
     image: "/project-5.webp",
     link: "https://global-supply.vercel.app/",
   },
@@ -49,7 +49,7 @@ export const PROJECTS = [
     description:
       "A pixel-perfect recreation of the Airbnb platform featuring property listings and booking workflows.",
     tags: ["React", "Node.js", "GraphQL"],
-    impact: "20K+ posts",
+    impact: "Booking workflow",
     image: "/project-6.webp",
     link: "https://air-bnb-sooty-gamma.vercel.app/",
   },

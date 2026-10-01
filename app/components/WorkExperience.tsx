@@ -21,7 +21,7 @@ const workExperience: WorkExperienceItem[] = [
     companyUrl: "https://famoulee.com/en",
     logo: "https://res.cloudinary.com/htetaunglinn-dev/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1781797863/Portfolio%20Next%20JS%202025/logo/dw5vu0pxyrekdk2c5ftm.svg",
     position: "Software Engineer",
-    period: "May 2026 - Present",
+    period: "March 2026 - Present",
     location: "Remote, Germany",
     description:
       "Contributing to Famoulee, a multilingual family-relationship platform for preserving memories, building family trees, and connecting loved ones across web and mobile. Ship production features across the Next.js frontend, Node.js API, and Flutter app—from profile and media workflows to real-time presence, tribute experiences, and pre-launch release preparation.",

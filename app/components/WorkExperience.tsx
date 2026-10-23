@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import WorkExperienceCard from "./WorkExperienceCard";
+import SectionHeading from "./SectionHeading";
+import { useScrollProgress } from "../hooks/useScrollProgress";
 
 interface WorkExperienceItem {
   company: string;
@@ -24,7 +26,7 @@ const workExperience: WorkExperienceItem[] = [
     period: "March 2026 - Present",
     location: "Remote, Germany",
     description:
-      "Contributing to Famoulee, a multilingual family-relationship platform for preserving memories, building family trees, and connecting loved ones across web and mobile. Ship production features across the Next.js frontend, Node.js API, and Flutter app—from profile and media workflows to real-time presence, tribute experiences, and pre-launch release preparation.",
+      "Contributing to Famoulee, a multilingual family-relationship platform for preserving memories, building family trees, and connecting loved ones across web and mobile. Ship production features across the Next.js frontend, Node.js API, and Flutter app - from profile and media workflows to real-time presence, tribute experiences, and pre-launch release preparation.",
     achievements: [
       "Built profile and media editing flows including photo upload, crop UI, and document image updates, improving reliability of biographic and multi-document uploads across the platform",
       "Expanded internationalization with German and Spanish translations and locale routing fixes, delivering a consistent multilingual experience across registration, settings, and core user journeys",
@@ -54,7 +56,7 @@ const workExperience: WorkExperienceItem[] = [
     period: "January 2024 - February 2026",
     location: "Bangkok, Thailand",
     description:
-      "Leading end-to-end development of enterprise CRM system from concept to production deployment. Driving technical excellence through performance optimization, mentorship, and data-driven architectural decisions that directly impact user experience and business metrics.",
+      "Led end-to-end development of an enterprise CRM system from concept to production deployment, driving technical excellence through performance optimization, mentorship, and data-driven architectural decisions that directly impact user experience and business metrics.",
     achievements: [
       "Led end-to-end development of enterprise CRM from concept to production, collaborating directly with stakeholders and delivering 15% performance gains through strategic optimization",
       "Mentored 3 junior developers on Angular and TypeScript best practices, accelerating team velocity by 25% while establishing scalable architecture patterns",
@@ -123,34 +125,14 @@ const workExperience: WorkExperienceItem[] = [
 ];
 
 export default function WorkExperience() {
-  const [sectionVisible, setSectionVisible] = useState(false);
   const [statsVisible, setStatsVisible] = useState(false);
+  const timelineRef = useScrollProgress<HTMLDivElement>("center");
   const [counts, setCounts] = useState({
     years: 0,
     projects: 0,
     satisfaction: 0,
     users: 0,
   });
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setSectionVisible(true);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const section = document.getElementById("experience");
-    if (section) {
-      observer.observe(section);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -209,29 +191,26 @@ export default function WorkExperience() {
   }, [statsVisible]);
 
   return (
-    <section
-      id="experience"
-      className={`py-20 md:py-40 px-6 relative transition-all duration-1000 ${
-        sectionVisible
-          ? "opacity-100 translate-y-0"
-          : "md:opacity-0 md:translate-y-10"
-      }`}
-    >
+    <section id="experience" className="py-10 md:py-16 px-6 relative">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-10 md:mb-20">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-            Work Experience
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#4A6FFF] to-transparent mx-auto mb-6" />
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            Building impactful solutions and leading teams across diverse
-            industries
-          </p>
-        </div>
+        <SectionHeading
+          index="03"
+          eyebrow="Trajectory"
+          title="Work Experience"
+          subtitle="Building impactful solutions and leading teams across diverse industries"
+        />
 
-        {/* Timeline */}
-        <div className="space-y-10 md:space-y-20">
+        {/* Timeline: an orbit track that fills as you scroll through it */}
+        <div ref={timelineRef} className="relative space-y-10 md:space-y-20">
+          <div
+            aria-hidden="true"
+            className="hidden md:block absolute top-0 bottom-0 w-px -translate-x-1/2 bg-white/10"
+            style={{ left: "calc((100% - 4rem) / 3 + 1rem)" }}
+          >
+            <div className="timeline-fill absolute inset-0 bg-gradient-to-b from-[#5a7dee] via-[#4169E1] to-[#4169E1]/0 shadow-[0_0_12px_rgba(65,105,225,0.8)]" />
+          </div>
+
           {workExperience.map((job, index) => (
             <WorkExperienceCard
               key={index}

@@ -36,6 +36,12 @@ body {
   user-select: none;
 }
 
+/* Sections sit above the fixed cosmos background */
+main {
+  position: relative;
+  isolation: isolate;
+}
+
 /* Parallax Layer Performance */
 .parallax-layer {
   will-change: transform;
@@ -93,179 +99,6 @@ h3 {
   }
 }
 
-@keyframes shooting-star {
-  0% {
-    transform: translate(0, 0) rotate(10deg);
-    opacity: 1;
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    transform: translate(800px, 800px) rotate(10deg);
-    opacity: 0;
-  }
-}
-
-/* CSS Star Field - single element, many stars via box-shadow */
-.star-field-layer-1,
-.star-field-layer-2,
-.star-field-layer-3 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 50%;
-}
-
-.star-field-layer-1 {
-  width: 2px;
-  height: 2px;
-  background: white;
-  box-shadow:
-    30vw 15vh 0 0 rgba(255, 255, 255, 0.9),
-    72vw 8vh 0 0 rgba(255, 255, 255, 0.8),
-    15vw 42vh 0 0 rgba(255, 255, 255, 0.85),
-    88vw 35vh 0 0 rgba(255, 255, 255, 0.9),
-    45vw 68vh 0 0 rgba(255, 255, 255, 0.7),
-    5vw 78vh 0 0 rgba(255, 255, 255, 0.85),
-    62vw 88vh 0 0 rgba(255, 255, 255, 0.8),
-    92vw 55vh 0 0 rgba(255, 255, 255, 0.75),
-    25vw 92vh 0 0 rgba(255, 255, 255, 0.9),
-    78vw 72vh 0 0 rgba(255, 255, 255, 0.8),
-    50vw 5vh 0 0 rgba(255, 255, 255, 0.85),
-    38vw 28vh 0 0 rgba(255, 255, 255, 0.7),
-    95vw 18vh 0 0 rgba(255, 255, 255, 0.9),
-    8vw 55vh 0 0 rgba(255, 255, 255, 0.8),
-    55vw 45vh 0 0 rgba(255, 255, 255, 0.75);
-  animation: twinkle-bright 4s ease-in-out infinite alternate;
-}
-
-.star-field-layer-2 {
-  width: 1px;
-  height: 1px;
-  background: white;
-  box-shadow:
-    10vw 20vh 0 0 rgba(255, 255, 255, 0.6),
-    22vw 5vh 0 0 rgba(255, 255, 255, 0.5),
-    35vw 75vh 0 0 rgba(255, 255, 255, 0.55),
-    48vw 30vh 0 0 rgba(255, 255, 255, 0.6),
-    60vw 12vh 0 0 rgba(255, 255, 255, 0.5),
-    75vw 50vh 0 0 rgba(255, 255, 255, 0.65),
-    85vw 80vh 0 0 rgba(255, 255, 255, 0.5),
-    12vw 65vh 0 0 rgba(255, 255, 255, 0.6),
-    42vw 90vh 0 0 rgba(255, 255, 255, 0.55),
-    68vw 40vh 0 0 rgba(255, 255, 255, 0.5),
-    3vw 35vh 0 0 rgba(255, 255, 255, 0.6),
-    90vw 70vh 0 0 rgba(255, 255, 255, 0.5),
-    28vw 58vh 0 0 rgba(255, 255, 255, 0.55),
-    53vw 15vh 0 0 rgba(255, 255, 255, 0.6),
-    82vw 25vh 0 0 rgba(255, 255, 255, 0.5),
-    18vw 85vh 0 0 rgba(255, 255, 255, 0.6),
-    65vw 62vh 0 0 rgba(255, 255, 255, 0.55),
-    40vw 48vh 0 0 rgba(255, 255, 255, 0.5),
-    97vw 42vh 0 0 rgba(255, 255, 255, 0.6),
-    7vw 10vh 0 0 rgba(255, 255, 255, 0.5);
-  animation: twinkle-medium 5s ease-in-out infinite alternate;
-}
-
-.star-field-layer-3 {
-  width: 1px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow:
-    5vw 8vh 0 0 rgba(255, 255, 255, 0.35),
-    14vw 32vh 0 0 rgba(255, 255, 255, 0.3),
-    20vw 72vh 0 0 rgba(255, 255, 255, 0.25),
-    32vw 18vh 0 0 rgba(255, 255, 255, 0.3),
-    44vw 55vh 0 0 rgba(255, 255, 255, 0.35),
-    56vw 78vh 0 0 rgba(255, 255, 255, 0.3),
-    67vw 22vh 0 0 rgba(255, 255, 255, 0.25),
-    76vw 65vh 0 0 rgba(255, 255, 255, 0.3),
-    84vw 10vh 0 0 rgba(255, 255, 255, 0.35),
-    93vw 48vh 0 0 rgba(255, 255, 255, 0.3),
-    2vw 90vh 0 0 rgba(255, 255, 255, 0.25),
-    16vw 50vh 0 0 rgba(255, 255, 255, 0.3),
-    26vw 38vh 0 0 rgba(255, 255, 255, 0.35),
-    37vw 82vh 0 0 rgba(255, 255, 255, 0.3),
-    49vw 42vh 0 0 rgba(255, 255, 255, 0.25),
-    58vw 28vh 0 0 rgba(255, 255, 255, 0.3),
-    70vw 95vh 0 0 rgba(255, 255, 255, 0.35),
-    80vw 38vh 0 0 rgba(255, 255, 255, 0.3),
-    89vw 85vh 0 0 rgba(255, 255, 255, 0.25),
-    96vw 30vh 0 0 rgba(255, 255, 255, 0.3),
-    11vw 15vh 0 0 rgba(255, 255, 255, 0.35),
-    24vw 62vh 0 0 rgba(255, 255, 255, 0.3),
-    33vw 95vh 0 0 rgba(255, 255, 255, 0.25),
-    41vw 8vh 0 0 rgba(255, 255, 255, 0.3),
-    52vw 52vh 0 0 rgba(255, 255, 255, 0.35),
-    63vw 35vh 0 0 rgba(255, 255, 255, 0.3),
-    74vw 82vh 0 0 rgba(255, 255, 255, 0.25),
-    86vw 58vh 0 0 rgba(255, 255, 255, 0.3),
-    91vw 15vh 0 0 rgba(255, 255, 255, 0.35),
-    8vw 45vh 0 0 rgba(255, 255, 255, 0.3);
-}
-
-@keyframes twinkle-bright {
-  0% {
-    opacity: 0.7;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes twinkle-medium {
-  0% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 0.8;
-  }
-}
-
-/* Shooting star with blinking head */
-.shooting-star-sparkle {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background: white;
-  border-radius: 50%;
-  box-shadow:
-    0 0 10px 3px rgba(255, 255, 255, 0.8),
-    0 0 25px 6px rgba(65, 105, 225, 0.5);
-  animation: star-blink 0.4s ease-in-out infinite;
-}
-
-/* Motion blur trail */
-.shooting-star-sparkle::before {
-  content: "";
-  position: absolute;
-  width: 90px;
-  height: 2px;
-  top: 50%;
-  left: 50%;
-  transform-origin: left center;
-  transform: rotate(-135deg) translateY(-50%);
-  background: linear-gradient(to left, transparent, rgba(65, 105, 225, 0.2), rgba(255, 255, 255, 0.45));
-  filter: blur(2px);
-  border-radius: 2px;
-}
-
-@keyframes star-blink {
-  0%, 100% {
-    opacity: 1;
-    box-shadow:
-      0 0 10px 3px rgba(255, 255, 255, 0.8),
-      0 0 25px 6px rgba(65, 105, 225, 0.5);
-  }
-  50% {
-    opacity: 0.2;
-    box-shadow:
-      0 0 4px 1px rgba(255, 255, 255, 0.3),
-      0 0 10px 2px rgba(65, 105, 225, 0.2);
-  }
-}
-
 /* Black hole glow pulse */
 @keyframes accretion-glow {
   0%,
@@ -289,10 +122,12 @@ h3 {
 
 .accretion-disk {
   animation: accretion-spin 20s linear infinite;
+  will-change: transform;
 }
 
 .accretion-glow {
   animation: accretion-glow 4s ease-in-out infinite;
+  will-change: opacity;
 }
 
 .animate-float {
@@ -346,4 +181,214 @@ h3 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(65, 105, 225, 0.7);
+}
+
+/* ------------------------------------------------------------------ */
+/* Cosmos: nebula layers driven by --page-progress (0 at top, 1 at end) */
+/* ------------------------------------------------------------------ */
+.nebula {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  will-change: transform, opacity;
+}
+
+.nebula-a {
+  width: 70vmax;
+  height: 70vmax;
+  top: -25vmax;
+  right: -15vmax;
+  background: radial-gradient(circle at center, rgba(65, 105, 225, 0.28), rgba(65, 105, 225, 0) 65%);
+  transform: translate3d(calc(var(--page-progress, 0) * -30vw), calc(var(--page-progress, 0) * 40vh), 0);
+}
+
+.nebula-b {
+  width: 60vmax;
+  height: 60vmax;
+  bottom: -30vmax;
+  left: -20vmax;
+  background: radial-gradient(circle at center, rgba(138, 43, 226, 0.2), rgba(138, 43, 226, 0) 65%);
+  transform: translate3d(calc(var(--page-progress, 0) * 35vw), calc(var(--page-progress, 0) * -45vh), 0);
+}
+
+.nebula-c {
+  width: 45vmax;
+  height: 45vmax;
+  top: 30%;
+  left: 35%;
+  background: radial-gradient(circle at center, rgba(90, 125, 238, 0.14), rgba(90, 125, 238, 0) 65%);
+  opacity: calc(0.4 + var(--page-progress, 0) * 0.6);
+  transform: scale(calc(0.8 + var(--page-progress, 0) * 0.6));
+}
+
+/* ------------------------------------------------------------------ */
+/* Reveal on scroll (see components/Reveal.tsx)                        */
+/* ------------------------------------------------------------------ */
+.reveal {
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal:not(.is-visible) {
+  opacity: 0;
+}
+
+.reveal-up:not(.is-visible) {
+  transform: translate3d(0, 40px, 0);
+}
+
+.reveal-blur:not(.is-visible) {
+  filter: blur(12px);
+  transform: translate3d(0, 12px, 0);
+}
+
+.reveal-scale:not(.is-visible) {
+  transform: scale(0.85);
+}
+
+.reveal-left:not(.is-visible) {
+  transform: translate3d(-48px, 0, 0);
+}
+
+.reveal-right:not(.is-visible) {
+  transform: translate3d(48px, 0, 0);
+}
+
+/* ------------------------------------------------------------------ */
+/* Hero: scroll-linked depth (--progress set by useScrollProgress)     */
+/* ------------------------------------------------------------------ */
+/* Only transform and opacity change here, so the browser can move these
+   layers on the GPU without repainting (no animated blur). */
+.hero-content,
+.hero-depth-near,
+.hero-depth-far {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.hero-content {
+  transform: translate3d(0, calc(var(--progress, 0) * 30vh), 0) scale(calc(1 - var(--progress, 0) * 0.1));
+  opacity: calc(1 - var(--progress, 0) * 1.6);
+}
+
+.hero-depth-near {
+  transform: translate3d(0, calc(var(--progress, 0) * -40vh), 0);
+}
+
+.hero-depth-far {
+  transform: translate3d(0, calc(var(--progress, 0) * 20vh), 0) scale(calc(1 + var(--progress, 0) * 0.25));
+}
+
+/* Orbit rings around the hero headline */
+@keyframes orbit-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.orbit-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 9999px;
+  border: 1px solid rgba(65, 105, 225, 0.12);
+  transform: translate(-50%, -50%);
+  animation: orbit-spin 60s linear infinite;
+}
+
+.orbit-ring::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #5a7dee;
+  box-shadow: 0 0 12px 3px rgba(65, 105, 225, 0.8);
+}
+
+/* Footer: planet horizon rises into view (see .horizon below) */
+
+/* Experience timeline: track fills as the section passes mid-screen */
+.timeline-fill {
+  transform: scaleY(var(--progress, 0));
+  transform-origin: top;
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion: keep everything static and visible                 */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .reveal,
+  .reveal:not(.is-visible) {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .hero-content,
+  .hero-depth-near,
+  .hero-depth-far,
+  .nebula-a,
+  .nebula-b {
+    transform: none;
+    filter: none;
+    opacity: 1;
+  }
+
+
+  .timeline-fill {
+    transform: none;
+  }
+}
+
+.horizon-frame {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 200px);
+  mask-image: linear-gradient(to bottom, transparent 0, black 200px);
+}
+
+/* Sized and shaded with gradients only (no large blurred shadow), on its own
+   GPU layer from first paint, so it is rasterised once and only moves on scroll. */
+.horizon {
+  width: 2400px;
+  height: 2400px;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle closest-side, transparent 96.5%, rgba(65, 105, 225, 0.3) 98.5%, rgba(90, 125, 238, 0.95) 99.7%, transparent 100%),
+    radial-gradient(circle at 50% 0%, #0d1a4d 0%, #050a1f 18%, #000 40%);
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(-50%, calc(clamp(0, (1 - var(--page-progress, 0)) * 8, 1) * 240px), 0);
+}
+
+/* Atmosphere glow riding on the planet's rim, faded out by the frame's mask */
+.horizon::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: -180px;
+  height: 360px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(65, 105, 225, 0.4), rgba(65, 105, 225, 0) 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .horizon {
+    transform: translateX(-50%);
+  }
 }

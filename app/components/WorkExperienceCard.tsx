@@ -63,6 +63,21 @@ export default function WorkExperienceCard({
         transitionDelay: `${index * 150}ms`,
       }}
     >
+      {/* Timeline node */}
+      <div
+        aria-hidden="true"
+        className="hidden md:block absolute top-10 -translate-x-1/2 -translate-y-1/2 z-10"
+        style={{ left: "calc((100% - 4rem) / 3 + 1rem)" }}
+      >
+        <span
+          className={`block w-4 h-4 rounded-full border-2 transition-all duration-700 ${
+            isVisible
+              ? "bg-[#4169E1] border-[#5a7dee] shadow-[0_0_16px_4px_rgba(65,105,225,0.7)]"
+              : "bg-black border-white/20"
+          }`}
+        />
+      </div>
+
       {/* Content Grid */}
       <div className="grid md:grid-cols-3 gap-8">
         {/* Left Column - Date and Logo (Desktop) */}

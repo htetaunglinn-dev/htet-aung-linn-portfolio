@@ -17,8 +17,27 @@ import {
   SiGit,
   SiLinux,
   SiNginx,
-  SiMysql
+  SiMysql,
+  SiAngular,
+  SiReactivex,
+  SiSass,
+  SiFlutter,
+  SiDart,
+  SiFirebase,
+  SiSocketdotio,
+  SiRedis,
+  SiPrisma,
+  SiPython,
+  SiStorybook,
+  SiVitest,
+  SiFigma,
+  SiStripe,
+  SiVercel,
+  SiGithubactions,
+  SiPostman,
+  SiMui,
 } from 'react-icons/si';
+import SectionHeading from './SectionHeading';
 import { FaAws } from 'react-icons/fa6';
 import { IconType } from 'react-icons';
 
@@ -27,11 +46,14 @@ interface TechLogo {
   Icon: IconType;
 }
 
-const techLogos: TechLogo[] = [
+// Two rows drifting in opposite directions, like orbits at different radii.
+const languagesAndFrameworks: TechLogo[] = [
   { name: 'React', Icon: SiReact },
   { name: 'Next.js', Icon: SiNextdotjs },
   { name: 'TypeScript', Icon: SiTypescript },
   { name: 'JavaScript', Icon: SiJavascript },
+  { name: 'Angular', Icon: SiAngular },
+  { name: 'RxJS', Icon: SiReactivex },
   { name: 'Node.js', Icon: SiNodedotjs },
   { name: 'Express', Icon: SiExpress },
   { name: 'NestJS', Icon: SiNestjs },
@@ -40,45 +62,99 @@ const techLogos: TechLogo[] = [
   { name: 'GraphQL', Icon: SiGraphql },
   { name: 'Tailwind CSS', Icon: SiTailwindcss },
   { name: 'Redux', Icon: SiRedux },
+  { name: 'Sass', Icon: SiSass },
+  { name: 'Material UI', Icon: SiMui },
+  { name: 'Flutter', Icon: SiFlutter },
+  { name: 'Dart', Icon: SiDart },
+  { name: 'Python', Icon: SiPython },
+];
+
+const platformsAndTools: TechLogo[] = [
   { name: 'Docker', Icon: SiDocker },
   { name: 'AWS', Icon: FaAws },
   { name: 'Git', Icon: SiGit },
   { name: 'Linux', Icon: SiLinux },
   { name: 'Nginx', Icon: SiNginx },
   { name: 'MySQL', Icon: SiMysql },
+  { name: 'Redis', Icon: SiRedis },
+  { name: 'Prisma', Icon: SiPrisma },
+  { name: 'Firebase', Icon: SiFirebase },
+  { name: 'Socket.io', Icon: SiSocketdotio },
+  { name: 'Stripe', Icon: SiStripe },
+  { name: 'Vercel', Icon: SiVercel },
+  { name: 'GitHub Actions', Icon: SiGithubactions },
+  { name: 'Storybook', Icon: SiStorybook },
+  { name: 'Vitest', Icon: SiVitest },
+  { name: 'Postman', Icon: SiPostman },
+  { name: 'Figma', Icon: SiFigma },
 ];
 
-export default function TechStackCarousel() {
+function LogoRow({ logos, reverse = false }: { logos: TechLogo[]; reverse?: boolean }) {
   // Duplicate the logos array for seamless loop
-  const duplicatedLogos = [...techLogos, ...techLogos];
+  const duplicatedLogos = [...logos, ...logos];
 
   return (
-    <section className="py-40 px-6 bg-gradient-to-b from-black to-[#0a0a0a] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        {/* Infinite Scrolling Carousel */}
-        <div className="relative overflow-hidden">
-          {/* Gradient Overlays - Extended to full edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-48 bg-gradient-to-r from-black via-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-48 bg-gradient-to-l from-black via-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-
-          {/* Scrolling Container */}
-          <div className="flex gap-12 py-8 overflow-hidden">
-            <div className="flex gap-12 animate-scroll-smooth">
-              {duplicatedLogos.map((tech, index) => {
-                const Icon = tech.Icon;
-                return (
-                  <div
-                    key={`${tech.name}-${index}`}
-                    className="flex-shrink-0"
-                  >
-                    <div className="w-24 h-24 bg-[#0a0a0a]/90 border border-[#4A6FFF]/20 rounded-2xl p-5 shadow-lg shadow-[#4A6FFF]/30 flex items-center justify-center">
-                      <Icon className="w-full h-full text-white opacity-80" />
-                    </div>
-                  </div>
-                );
-              })}
+    <div className="flex py-4 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+      <div className={`flex gap-12 pr-12 animate-scroll-smooth ${reverse ? 'animate-scroll-reverse' : ''}`}>
+        {duplicatedLogos.map((tech, index) => {
+          const Icon = tech.Icon;
+          return (
+            <div
+              key={`${tech.name}-${index}`}
+              className="flex-shrink-0"
+              title={tech.name}
+              aria-hidden={index >= logos.length}
+            >
+              <div className="w-24 h-24 bg-[#0a0a0a]/90 border border-[#4A6FFF]/20 rounded-2xl p-5 shadow-lg shadow-[#4A6FFF]/30 flex items-center justify-center">
+                <Icon className="w-full h-full text-white opacity-80" aria-label={tech.name} />
+              </div>
             </div>
-          </div>
+          );
+        })}
+      </div>
+        <style jsx>{`
+          @keyframes scroll-smooth {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+
+          .animate-scroll-smooth {
+            animation: scroll-smooth 45s linear infinite;
+            will-change: transform;
+          }
+
+          .animate-scroll-reverse {
+            animation-direction: reverse;
+            animation-duration: 55s;
+          }
+
+          .animate-scroll-smooth:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+    </div>
+  );
+}
+
+export default function TechStackCarousel() {
+  return (
+    <section id="skills" className="py-10 md:py-16 px-6 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <SectionHeading
+          index="02"
+          eyebrow="Toolkit"
+          title="Tech Universe"
+          subtitle="The languages, frameworks and platforms I build with every day"
+        />
+
+        {/* Infinite Scrolling Carousel */}
+        <div className="relative space-y-4">
+          <LogoRow logos={languagesAndFrameworks} />
+          <LogoRow logos={platformsAndTools} reverse />
         </div>
       </div>
 
@@ -86,26 +162,8 @@ export default function TechStackCarousel() {
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[#4A6FFF]/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-[#4A6FFF]/5 rounded-full blur-3xl" />
-        {/* Additional Lighting Effects */}
-        <div className="absolute top-0 left-10 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.1),transparent_70%)] blur-3xl" />
-        <div className="absolute bottom-0 right-10 w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(74,111,255,0.08),transparent_70%)] blur-3xl" />
       </div>
 
-      <style jsx>{`
-        @keyframes scroll-smooth {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(calc(-100% / 2));
-          }
-        }
-
-        .animate-scroll-smooth {
-          animation: scroll-smooth 30s linear infinite;
-          will-change: transform;
-        }
-      `}</style>
     </section>
   );
 }

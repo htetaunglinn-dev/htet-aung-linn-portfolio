@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getScrollTarget } from '@/app/lib/scroll-utils';
+import { smoothScrollTo } from '@/app/lib/smooth-scroll';
 
 export default function Navigation() {
   const [activeSection, setActiveSection] = useState('home');
@@ -15,7 +16,7 @@ export default function Navigation() {
         window.requestAnimationFrame(() => {
           setIsScrolled(window.scrollY > 50);
 
-          const sections = ['home', 'about', 'experience', 'projects', 'contact'];
+          const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
           const scrollPosition = window.scrollY + 100;
 
           for (const section of sections) {
@@ -45,15 +46,13 @@ export default function Navigation() {
       const navHeight = 72; // Fixed nav height offset
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       const target = getScrollTarget(sectionId, elementPosition, navHeight);
-      window.scrollTo({
-        top: target,
-        behavior: 'smooth',
-      });
+      smoothScrollTo(target);
     }
   };
 
   const navItems = [
     { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
@@ -63,7 +62,7 @@ export default function Navigation() {
     <nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
-        backgroundColor: isScrolled ? 'rgba(0, 0, 0, 0.8)' : 'transparent',
+        backgroundColor: isScrolled ? 'rgba(0, 0, 0, 0.6)' : 'transparent',
         backdropFilter: isScrolled ? 'blur(16px)' : 'none',
         borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid transparent',
       }}
@@ -99,6 +98,14 @@ export default function Navigation() {
           </button>
         </div>
       </div>
+
+      {/* Scroll progress: a thin beam of light across the bottom of the bar */}
+      <div
+        aria-hidden="true"
+        data-page-progress
+        className="absolute left-0 bottom-0 h-px w-full origin-left bg-gradient-to-r from-[#4169E1] via-[#5a7dee] to-[#4169E1] shadow-[0_0_10px_rgba(65,105,225,0.9)]"
+        style={{ transform: 'scaleX(var(--page-progress, 0))' }}
+      />
     </nav>
   );
 }

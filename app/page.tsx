@@ -1,122 +1,76 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navigation from "./components/Navigation";
-import FloatingParticles from "./components/FloatingParticles";
+import CosmosBackground from "./components/CosmosBackground";
+import ScrollProgress from "./components/ScrollProgress";
+import SmoothScroll from "./components/SmoothScroll";
+import Reveal from "./components/Reveal";
+import SectionHeading from "./components/SectionHeading";
 import ParallaxCard from "./components/ParallaxCard";
 import WorkExperience from "./components/WorkExperience";
 import TechStackCarousel from "./components/TechStackCarousel";
 import SecureExternalLink from "./components/SecureExternalLink";
 import { PROJECTS } from "./project-data.const";
 import { useCountUp } from "./hooks/useCountUp";
+import { useScrollProgress } from "./hooks/useScrollProgress";
 
 const CAREER_START_YEAR = 2022;
+
+const CORE_EXPERTISE = [
+  "React",
+  "Next.js",
+  "Angular",
+  "TypeScript",
+  "Node.js",
+  "Express",
+  "PostgreSQL",
+  "MongoDB",
+  "AWS",
+  "Docker",
+  "GraphQL",
+  "REST APIs",
+  "Tailwind CSS",
+  "Git",
+  "CI/CD",
+  "Redux",
+  "NestJS",
+];
 
 export default function Home() {
   const yearsExperience = new Date().getFullYear() - CAREER_START_YEAR;
   const yearsCount = useCountUp(yearsExperience);
   const projectsCount = useCountUp(50);
   const satisfactionCount = useCountUp(98);
+  const heroRef = useScrollProgress<HTMLElement>("exit");
 
-  const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [revealedContacts, setRevealedContacts] = useState<
     Record<string, boolean>
   >({});
-  const [shootingStars, setShootingStars] = useState<
-    Array<{ top: number; left: number; duration: number; delay: number }>
-  >([]);
-  const [isMounted, setIsMounted] = useState(false);
 
   const handleRevealContact = (type: string) => {
     setRevealedContacts((prev) => ({ ...prev, [type]: true }));
   };
 
-  useEffect(() => {
-    setIsMounted(true);
-
-    // Generate shooting stars (3 with staggered delays)
-    const generatedShootingStars = Array.from({ length: 3 }, (_, i) => ({
-      top: Math.random() * 40,
-      left: -5 + Math.random() * 15,
-      duration: 4 + Math.random() * 3,
-      delay: -(i * 8),
-    }));
-    setShootingStars(generatedShootingStars);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible((prev) => ({ ...prev, [entry.target.id]: true }));
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-
-    document.querySelectorAll("section[id]").forEach((section) => {
-      observer.observe(section);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
-      <FloatingParticles />
+      <SmoothScroll />
+      <CosmosBackground />
       <Navigation />
+      <ScrollProgress />
       <main className="min-h-screen overflow-x-hidden">
         {/* Hero Section */}
         <section
           id="home"
+          ref={heroRef}
           className="relative min-h-screen flex items-center justify-center overflow-hidden"
         >
-          {/* Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
-
-          {/* Nebula/Galaxy Clouds - visible cosmic colors */}
-          <div className="absolute inset-0 opacity-50">
-            <div className="absolute top-[-10%] right-[10%] w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.2),rgba(138,43,226,0.12),transparent_70%)] blur-3xl" />
-            <div className="absolute bottom-[-5%] left-[5%] w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_center,rgba(138,43,226,0.15),rgba(65,105,225,0.1),transparent_70%)] blur-3xl" />
-            <div className="absolute top-[30%] left-[40%] w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(88,60,180,0.1),transparent_70%)] blur-3xl" />
-          </div>
-
-          {/* CSS Star Field - 3 layers, ~65 stars, only 3 DOM nodes */}
+          {/* Black Hole: far layer, sinks and grows as you scroll */}
           <div
-            className="absolute inset-0"
-            style={{ transform: "translateZ(0)" }}
+            aria-hidden="true"
+            className="hero-depth-far absolute top-[15%] right-[10%] w-96 h-96 hidden lg:block"
           >
-            <div className="star-field-layer-1" />
-            <div className="star-field-layer-2" />
-            <div className="star-field-layer-3" />
-          </div>
-
-          {/* Shooting Stars with sparkle trails */}
-          {isMounted && (
-            <div className="absolute inset-0 overflow-hidden">
-              {shootingStars.map((star, i) => (
-                <div
-                  key={`shooting-${i}`}
-                  className="shooting-star-sparkle"
-                  style={{
-                    top: `${star.top}%`,
-                    left: `${star.left}%`,
-                    animationName: "shooting-star",
-                    animationDuration: `${star.duration}s`,
-                    animationTimingFunction: "ease-in",
-                    animationIterationCount: "infinite",
-                    animationDelay: `${star.delay}s`,
-                  }}
-                />
-              ))}
-            </div>
-          )}
-
-          {/* Black Hole Effect - larger, more visible */}
-          <div className="absolute top-[15%] right-[10%] w-96 h-96 hidden lg:block">
             <div className="relative w-full h-full">
               {/* Deep space void */}
               <div className="absolute inset-[15%] rounded-full bg-black z-10" />
@@ -153,75 +107,79 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Subtle Geometric Pattern (no mouse parallax) */}
-          <div className="absolute inset-0 opacity-10">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `linear-gradient(rgba(65,105,225,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(65,105,225,0.1) 1px, transparent 1px)`,
-                backgroundSize: "100px 100px",
-              }}
-            />
-          </div>
-
-          {/* Floating Stats Cards */}
-          <div className="absolute top-1/4 left-[8%] z-20 animate-float hidden lg:block">
-            <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
-              <p className="text-4xl font-bold text-[#4169E1] mb-1">{yearsCount}+</p>
-              <p className="text-xs text-gray-400 tracking-wide">
-                Years Experience
-              </p>
+          {/* Floating Stats Cards: near layer, drift up faster than the page */}
+          <div className="hero-depth-near absolute top-1/4 left-[8%] z-20 hidden lg:block">
+            <div className="animate-float">
+              <div className="bg-black/75 border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
+                <p className="text-4xl font-bold text-[#4169E1] mb-1">{yearsCount}+</p>
+                <p className="text-xs text-gray-400 tracking-wide">
+                  Years Experience
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="absolute bottom-1/4 right-[8%] z-20 animate-float-delayed hidden lg:block">
-            <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
-              <p className="text-4xl font-bold text-[#4169E1] mb-1">{projectsCount}+</p>
-              <p className="text-xs text-gray-400 tracking-wide">
-                Projects Delivered
-              </p>
+          <div className="hero-depth-near absolute bottom-1/4 right-[8%] z-20 hidden lg:block">
+            <div className="animate-float-delayed">
+              <div className="bg-black/75 border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
+                <p className="text-4xl font-bold text-[#4169E1] mb-1">{projectsCount}+</p>
+                <p className="text-xs text-gray-400 tracking-wide">
+                  Projects Delivered
+                </p>
+              </div>
             </div>
           </div>
 
-          <div
-            className="absolute top-1/3 right-[12%] z-20 animate-float hidden lg:block"
-            style={{ animationDelay: "0.5s" }}
-          >
-            <div className="bg-black/60 backdrop-blur-md border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
-              <p className="text-4xl font-bold text-[#4169E1] mb-1">{satisfactionCount}%</p>
-              <p className="text-xs text-gray-400 tracking-wide">
-                Client Satisfaction
-              </p>
+          <div className="hero-depth-near absolute top-1/3 right-[12%] z-20 hidden lg:block">
+            <div className="animate-float" style={{ animationDelay: "0.5s" }}>
+              <div className="bg-black/75 border border-[#4169E1]/20 rounded-xl p-5 shadow-2xl">
+                <p className="text-4xl font-bold text-[#4169E1] mb-1">{satisfactionCount}%</p>
+                <p className="text-xs text-gray-400 tracking-wide">
+                  Client Satisfaction
+                </p>
+              </div>
             </div>
-          </div>
-
-          {/* Floating Depth Layers */}
-          <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-[#4169E1]/20 rounded-full blur-3xl" />
-            <div className="absolute bottom-40 right-20 w-40 h-40 bg-[#5a7dee]/20 rounded-full blur-3xl" />
-            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-[#4169E1]/15 rounded-full blur-2xl" />
           </div>
 
           {/* Content */}
-          <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
-            <div className="mb-8">
-              <span className="inline-block px-4 py-2 bg-[#4169E1]/10 border border-[#4169E1]/20 rounded-full text-[#4169E1] text-sm font-medium mb-8">
+          <div className="hero-content relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
+            {/* Orbit rings behind the headline */}
+            <div aria-hidden="true" className="pointer-events-none hidden sm:block">
+              <div className="orbit-ring w-[640px] h-[640px]" />
+              <div
+                className="orbit-ring w-[880px] h-[880px] opacity-60"
+                style={{ animationDuration: "90s", animationDirection: "reverse" }}
+              />
+            </div>
+
+            <Reveal variant="blur" className="mb-8">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#4169E1]/10 border border-[#4169E1]/20 rounded-full text-[#4169E1] text-sm font-medium mb-8">
+                <span className="relative flex w-2 h-2">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-[#4169E1] opacity-75 animate-ping" />
+                  <span className="relative inline-flex w-2 h-2 rounded-full bg-[#4169E1]" />
+                </span>
                 Software Engineer
               </span>
-            </div>
+            </Reveal>
             <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold mb-8 text-white leading-[1.15] tracking-tight">
-              Crafting Digital
+              <Reveal as="span" delay={150} className="inline-block">
+                Crafting Digital
+              </Reveal>
               <br />
-              <span className="bg-gradient-to-r from-[#4169E1] via-[#5a7dee] to-[#4169E1] bg-clip-text text-transparent">
-                Excellence
-              </span>
+              <Reveal as="span" variant="blur" delay={350} className="inline-block">
+                <span className="bg-gradient-to-r from-[#4169E1] via-[#5a7dee] to-[#4169E1] bg-clip-text text-transparent">
+                  Excellence
+                </span>
+              </Reveal>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-400 mb-10 md:mb-16 max-w-3xl mx-auto leading-relaxed font-light">
-              Building exceptional web experiences with modern technologies,
-              <br className="hidden md:block" />
-              elegant architecture, and meticulous attention to detail
-            </p>
-            <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
+            <Reveal delay={550}>
+              <p className="text-xl md:text-2xl text-gray-400 mb-10 md:mb-16 max-w-3xl mx-auto leading-relaxed font-light">
+                Building exceptional web experiences with modern technologies,{" "}
+                <br className="hidden md:block" />
+                elegant architecture, and meticulous attention to detail
+              </p>
+            </Reveal>
+            <Reveal delay={750} className="flex flex-col items-center sm:flex-row gap-4 justify-center">
               <a
                 href="#projects"
                 className="group px-8 py-4 md:px-10 bg-[#4169E1] hover:bg-[#3454b4] text-white rounded-lg transition-all duration-300 hover:scale-105 font-semibold shadow-2xl shadow-[#4169E1]/20"
@@ -233,92 +191,94 @@ export default function Home() {
               </a>
               <a
                 href="#contact"
-                className="px-8 py-4 md:px-10 bg-transparent hover:bg-white/5 text-white border-2 border-[#4169E1]/30 hover:border-[#4169E1] rounded-lg transition-all duration-300 hover:scale-105 font-semibold backdrop-blur-sm"
+                className="px-8 py-4 md:px-10 bg-transparent hover:bg-white/5 text-white border-2 border-[#4169E1]/30 hover:border-[#4169E1] rounded-lg transition-all duration-300 hover:scale-105 font-semibold"
               >
                 Let&apos;s Connect
               </a>
-            </div>
-
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
-              <div className="w-6 h-10 border-2 border-[#4169E1]/30 rounded-full flex items-start justify-center p-2">
-                <div className="w-1 h-2 bg-[#4169E1] rounded-full" />
-              </div>
-            </div>
+            </Reveal>
           </div>
+
+          {/* Scroll Indicator */}
+          <a
+            href="#about"
+            className="hero-content absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 text-[10px] uppercase tracking-[0.35em] text-gray-500 hover:text-[#4169E1] transition-colors"
+          >
+            Scroll to explore
+            <span className="w-6 h-10 border-2 border-[#4169E1]/30 rounded-full flex items-start justify-center p-2 animate-bounce">
+              <span className="w-1 h-2 bg-[#4169E1] rounded-full" />
+            </span>
+          </a>
         </section>
 
         {/* About Section */}
-        <section
-          id="about"
-          className={`py-20 md:py-40 px-6 relative transition-all duration-1000 ${
-            isVisible.about
-              ? "opacity-100 translate-y-0"
-              : "md:opacity-0 md:translate-y-10"
-          }`}
-        >
+        <section id="about" className="py-10 md:py-16 px-6 relative">
           {/* Subtle Lighting Effect */}
           <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.08),transparent_70%)] blur-3xl pointer-events-none" />
 
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-center text-white">
-              About Me
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#4169E1] to-transparent mx-auto mb-10 md:mb-20" />
+            <SectionHeading index="01" eyebrow="Origin" title="About Me" />
 
             <div className="grid md:grid-cols-5 gap-8 md:gap-16 items-start">
               <div className="md:col-span-3 space-y-6">
-                <p className="text-gray-400 text-lg leading-relaxed">
-                  I&apos;m a passionate Software Engineer building
-                  high-performance web applications that drive business growth.
-                  My expertise spans the entire development lifecycle—from
-                  architecture design to production deployment.
-                </p>
-                <p className="text-gray-400 text-lg leading-relaxed">
-                  Specializing in React ecosystem and modern frontend
-                  technologies, I&apos;ve delivered enterprise CRM systems,
-                  fintech platforms, and scalable SaaS applications. I focus on
-                  performance optimization, clean architecture, and mentoring
-                  teams to build exceptional user experiences.
-                </p>
-                <p className="text-gray-400 text-lg leading-relaxed">
-                  Currently serving as Software Engineer at GoFive in Bangkok,
-                  Thailand, where I lead end-to-end development of enterprise
-                  solutions, achieving measurable improvements in performance,
-                  user satisfaction, and team efficiency.
-                </p>
+                {[
+                  <>
+                    I&apos;m a passionate Software Engineer building
+                    high-performance web applications that drive business
+                    growth. My expertise spans the entire development
+                    lifecycle - from architecture design to production deployment.
+                  </>,
+                  <>
+                    Specializing in React ecosystem and modern frontend
+                    technologies, I&apos;ve delivered enterprise CRM systems,
+                    fintech platforms, and scalable SaaS applications. I focus
+                    on performance optimization, clean architecture, and
+                    mentoring teams to build exceptional user experiences.
+                  </>,
+                  <>
+                    Currently building multilingual web and mobile experiences
+                    at Famoulee, after leading end-to-end development of
+                    enterprise solutions at GoFive in Bangkok - achieving
+                    measurable improvements in performance, user satisfaction,
+                    and team efficiency.
+                  </>,
+                ].map((paragraph, index) => (
+                  <Reveal key={index} variant="left" delay={index * 150}>
+                    <p className="text-gray-400 text-lg leading-relaxed">
+                      {paragraph}
+                    </p>
+                  </Reveal>
+                ))}
               </div>
 
               <div className="md:col-span-2">
-                <h3 className="text-xl font-semibold mb-6 text-white">
-                  Core Expertise
-                </h3>
+                {/* Profile in orbit */}
+                <Reveal variant="scale" className="relative w-48 h-48 mx-auto md:mx-0 mb-12">
+                  <div aria-hidden="true" className="orbit-ring w-[135%] h-[135%]" style={{ animationDuration: "24s" }} />
+                  <div className="absolute inset-0 rounded-full p-[2px] bg-gradient-to-br from-[#5a7dee] via-[#4169E1]/40 to-transparent shadow-[0_0_60px_rgba(65,105,225,0.35)]">
+                    <div className="relative w-full h-full rounded-full overflow-hidden bg-black">
+                      <Image
+                        src="/profile.jpg"
+                        alt="Htet Aung Linn"
+                        width={192}
+                        height={192}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </Reveal>
+
+                <Reveal>
+                  <h3 className="text-xl font-semibold mb-6 text-white">
+                    Core Expertise
+                  </h3>
+                </Reveal>
                 <div className="flex flex-wrap gap-3">
-                  {[
-                    "React",
-                    "Next.js",
-                    "Angular",
-                    "TypeScript",
-                    "Node.js",
-                    "Express",
-                    "PostgreSQL",
-                    "MongoDB",
-                    "AWS",
-                    "Docker",
-                    "GraphQL",
-                    "REST APIs",
-                    "Tailwind CSS",
-                    "Git",
-                    "CI/CD",
-                    "Redux",
-                    "NestJS",
-                  ].map((skill, index) => (
-                    <span
-                      key={index}
-                      className="px-4 py-2 bg-[#4169E1]/10 border border-[#4169E1]/20 rounded-lg text-[#4169E1] text-sm font-medium hover:bg-[#4169E1]/20 transition-colors cursor-default"
-                    >
-                      {skill}
-                    </span>
+                  {CORE_EXPERTISE.map((skill, index) => (
+                    <Reveal key={skill} as="span" variant="scale" delay={index * 40}>
+                      <span className="inline-block px-4 py-2 bg-[#4169E1]/10 border border-[#4169E1]/20 rounded-lg text-[#4169E1] text-sm font-medium hover:bg-[#4169E1]/20 transition-colors cursor-default">
+                        {skill}
+                      </span>
+                    </Reveal>
                   ))}
                 </div>
               </div>
@@ -333,114 +293,99 @@ export default function Home() {
         <WorkExperience />
 
         {/* Projects Section */}
-        <section
-          id="projects"
-          className={`py-20 md:py-40 px-6 bg-gradient-to-b from-[#0a0a0a] to-black relative transition-all duration-1000 ${
-            isVisible.projects
-              ? "opacity-100 translate-y-0"
-              : "md:opacity-0 md:translate-y-10"
-          }`}
-        >
+        <section id="projects" className="py-10 md:py-16 px-6 relative">
           {/* Subtle Lighting Effects - Reduced from 3 to 1 for performance */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.1),transparent_70%)] blur-3xl" />
           </div>
 
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-center text-white">
-              Featured Projects
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#4169E1] to-transparent mx-auto mb-10 md:mb-20" />
+            <SectionHeading
+              index="04"
+              eyebrow="Missions"
+              title="Featured Projects"
+            />
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {PROJECTS.map((project, index) => (
-                <a
-                  key={index}
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block h-full focus:outline-none focus:ring-2 focus:ring-[#4169E1] rounded-2xl"
-                >
-                  <ParallaxCard
-                    intensity={10}
-                    className="group relative bg-black/40 backdrop-blur-sm border border-[#4169E1]/30 lg:border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 h-full flex flex-col"
+                <Reveal key={project.title} delay={(index % 3) * 120} className="h-full">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block h-full focus:outline-none focus:ring-2 focus:ring-[#4169E1] rounded-2xl"
                   >
-                    {/* Thumbnail Placeholder */}
-                    <div className="relative w-full h-48 bg-gradient-to-br from-[#4169E1]/10 to-[#4169E1]/5 rounded-xl mb-6 border border-[#4169E1]/30 lg:border-[#4169E1]/10 group-hover:border-[#4169E1]/30 transition-colors overflow-hidden shrink-0">
-                      <Image
-                        src={project.image}
-                        alt={`${project.title} project preview`}
-                        fill
-                        className="object-cover object-center"
-                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                        priority={index < 2}
-                        loading={index < 2 ? "eager" : "lazy"}
-                        placeholder="blur"
-                        blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0icmdiYSg2NSwxMDUsMjI1LDAuMSkiLz48L3N2Zz4="
-                      />
-                    </div>
+                    <ParallaxCard
+                      intensity={10}
+                      className="group relative bg-black/40 backdrop-blur-sm border border-[#4169E1]/30 lg:border-[#4169E1]/10 rounded-2xl p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 h-full flex flex-col"
+                    >
+                      {/* Thumbnail Placeholder */}
+                      <div className="relative w-full h-48 bg-gradient-to-br from-[#4169E1]/10 to-[#4169E1]/5 rounded-xl mb-6 border border-[#4169E1]/30 lg:border-[#4169E1]/10 group-hover:border-[#4169E1]/30 transition-colors overflow-hidden shrink-0">
+                        <Image
+                          src={project.image}
+                          alt={`${project.title} project preview`}
+                          fill
+                          className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                          priority={index < 2}
+                          loading={index < 2 ? "eager" : "lazy"}
+                          placeholder="blur"
+                          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0icmdiYSg2NSwxMDUsMjI1LDAuMSkiLz48L3N2Zz4="
+                        />
+                      </div>
 
-                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#4169E1] transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-400 mb-5 text-sm leading-relaxed flex-grow">
-                      {project.description}
-                    </p>
+                      <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#4169E1] transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-400 mb-5 text-sm leading-relaxed flex-grow">
+                        {project.description}
+                      </p>
 
-                    <div className="flex items-center gap-2 mb-5">
-                      <span className="px-3 py-1.5 bg-[#4169E1]/10 border border-[#4169E1]/20 text-[#4169E1] text-xs rounded-lg font-semibold">
-                        {project.impact}
-                      </span>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 bg-white/5 border border-white/10 text-gray-400 text-xs rounded-lg"
-                        >
-                          {tag}
+                      <div className="flex items-center gap-2 mb-5">
+                        <span className="px-3 py-1.5 bg-[#4169E1]/10 border border-[#4169E1]/20 text-[#4169E1] text-xs rounded-lg font-semibold">
+                          {project.impact}
                         </span>
-                      ))}
-                    </div>
+                      </div>
 
-                    <div className="inline-flex items-center gap-2 text-[#4169E1] font-medium text-sm group-hover:gap-3 transition-all mt-auto">
-                      View Project
-                      <span className="group-hover:translate-x-1 transition-transform">
-                        →
-                      </span>
-                    </div>
-                  </ParallaxCard>
-                </a>
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 bg-white/5 border border-white/10 text-gray-400 text-xs rounded-lg"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="inline-flex items-center gap-2 text-[#4169E1] font-medium text-sm group-hover:gap-3 transition-all mt-auto">
+                        View Project
+                        <span className="group-hover:translate-x-1 transition-transform">
+                          →
+                        </span>
+                      </div>
+                    </ParallaxCard>
+                  </a>
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section
-          id="contact"
-          className={`py-20 md:py-40 px-6 relative transition-all duration-1000 ${
-            isVisible.contact
-              ? "opacity-100 translate-y-0"
-              : "md:opacity-0 md:translate-y-10"
-          }`}
-        >
+        <section id="contact" className="py-10 md:py-16 px-6 relative">
           {/* Subtle Lighting Effects - Reduced from 3 to 1 for performance */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-1/3 left-1/3 w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_center,rgba(65,105,225,0.12),transparent_70%)] blur-3xl" />
           </div>
 
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-center text-white">
-              Let&apos;s Work Together
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#4169E1] to-transparent mx-auto mb-6 md:mb-12" />
-            <p className="text-lg md:text-xl text-gray-400 mb-10 md:mb-20 text-center max-w-3xl mx-auto leading-relaxed">
-              I&apos;m always excited to collaborate on innovative projects and
-              connect with fellow tech enthusiasts. Let&apos;s create something
-              exceptional together.
-            </p>
+            <SectionHeading
+              index="05"
+              eyebrow="Transmission"
+              title="Let's Work Together"
+              subtitle="I'm always excited to collaborate on innovative projects and connect with fellow tech enthusiasts. Let's create something exceptional together."
+            />
 
             <div
               className="grid md:grid-cols-2 gap-8 mb-16"
@@ -475,12 +420,10 @@ export default function Home() {
                 const isRevealed = revealedContacts[contact.label];
                 const needsReveal = contact.needsReveal && !isRevealed;
 
-                if (needsReveal) {
-                  return (
+                const card = needsReveal ? (
                     <button
-                      key={index}
                       onClick={() => handleRevealContact(contact.label)}
-                      className="group bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-5 md:p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 flex items-center justify-between text-left"
+                      className="group bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-5 md:p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 w-full h-full flex items-center justify-between text-left"
                     >
                       <div>
                         <div className="text-sm text-gray-400 mb-2 uppercase tracking-wider">
@@ -494,12 +437,8 @@ export default function Home() {
                         🔒
                       </span>
                     </button>
-                  );
-                }
-
-                return (
+                ) : (
                   <a
-                    key={index}
                     href={contact.href}
                     target={
                       contact.label !== "Email" && contact.label !== "Phone"
@@ -511,7 +450,7 @@ export default function Home() {
                         ? "noopener noreferrer"
                         : undefined
                     }
-                    className="group bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-5 md:p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 flex items-center justify-between"
+                    className="group bg-black/40 backdrop-blur-sm border border-[#4169E1]/10 rounded-2xl p-5 md:p-8 hover:border-[#4169E1]/30 transition-all duration-300 hover:shadow-2xl hover:shadow-[#4169E1]/10 w-full h-full flex items-center justify-between"
                   >
                     <div className="min-w-0 flex-1">
                       <div className="text-sm text-gray-400 mb-2 uppercase tracking-wider">
@@ -526,46 +465,65 @@ export default function Home() {
                     </span>
                   </a>
                 );
+
+                return (
+                  <Reveal
+                    key={contact.label}
+                    className="h-full"
+                    variant={index % 2 === 0 ? "left" : "right"}
+                    delay={Math.floor(index / 2) * 120}
+                  >
+                    {card}
+                  </Reveal>
+                );
               })}
             </div>
 
-            <div className="relative bg-gradient-to-r from-[#4169E1]/10 to-[#4169E1]/5 backdrop-blur-sm border-2 border-[#4169E1]/20 rounded-3xl p-8 md:p-16 text-center overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(65,105,225,0.1),transparent_70%)]" />
-              <div className="relative z-10">
-                <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                  Have a Project in Mind?
-                </h3>
-                <p className="text-gray-400 mb-8 md:mb-10 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-                  Whether it&apos;s a complex web application or a simple
-                  landing page, I&apos;m here to help bring your vision to life
-                  with clean code and elegant solutions.
-                </p>
-                <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
-                  <a
-                    href="mailto:htaunglin@gmail.com"
-                    className="group inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 bg-[#4169E1] hover:bg-[#3454b4] text-white rounded-xl transition-all duration-300 hover:scale-105 font-bold text-base md:text-lg shadow-2xl shadow-[#4169E1]/20"
-                  >
-                    Send a Message
-                    <span className="group-hover:translate-x-1 transition-transform">
-                      →
-                    </span>
-                  </a>
-                  <a
-                    href="/Htet_Aung_Linn_Resume.pdf"
-                    download="Htet_Aung_Linn_Resume.pdf"
-                    className="inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 bg-transparent hover:bg-white/5 border-2 border-[#4169E1]/30 hover:border-[#4169E1] text-white rounded-xl transition-all duration-300 hover:scale-105 font-bold text-base md:text-lg"
-                  >
-                    Download Resume
-                  </a>
+            <Reveal variant="scale">
+              <div className="relative bg-gradient-to-r from-[#4169E1]/10 to-[#4169E1]/5 backdrop-blur-sm border-2 border-[#4169E1]/20 rounded-3xl p-8 md:p-16 text-center overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(65,105,225,0.1),transparent_70%)]" />
+                <div className="relative z-10">
+                  <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                    Have a Project in Mind?
+                  </h3>
+                  <p className="text-gray-400 mb-8 md:mb-10 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+                    Whether it&apos;s a complex web application or a simple
+                    landing page, I&apos;m here to help bring your vision to life
+                    with clean code and elegant solutions.
+                  </p>
+                  <div className="flex flex-col items-center sm:flex-row gap-4 justify-center">
+                    <a
+                      href="mailto:htaunglin@gmail.com"
+                      className="group inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 bg-[#4169E1] hover:bg-[#3454b4] text-white rounded-xl transition-all duration-300 hover:scale-105 font-bold text-base md:text-lg shadow-2xl shadow-[#4169E1]/20"
+                    >
+                      Send a Message
+                      <span className="group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+                    </a>
+                    <a
+                      href="/Htet_Aung_Linn_Resume.pdf"
+                      download="Htet_Aung_Linn_Resume.pdf"
+                      className="inline-flex items-center gap-3 px-7 py-4 md:px-10 md:py-5 bg-transparent hover:bg-white/5 border-2 border-[#4169E1]/30 hover:border-[#4169E1] text-white rounded-xl transition-all duration-300 hover:scale-105 font-bold text-base md:text-lg"
+                    >
+                      Download Resume
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="py-16 px-6 border-t border-[#4169E1]/10 bg-black">
-          <div className="max-w-6xl mx-auto">
+        <footer className="relative overflow-hidden pt-40 pb-16 px-6">
+          {/* Planet horizon: rises into view over the last stretch of the page.
+              The mask fades its glow out before the footer's top edge, so there is no hard line. */}
+          <div aria-hidden="true" className="horizon-frame absolute inset-0 overflow-hidden pointer-events-none">
+            <div data-page-progress className="horizon absolute left-1/2 top-40" />
+          </div>
+
+          <div className="relative max-w-6xl mx-auto">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
               <div className="text-center md:text-left">
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-[#4169E1] to-[#5a7dee] bg-clip-text text-transparent mb-3">

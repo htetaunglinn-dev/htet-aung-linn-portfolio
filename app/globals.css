@@ -392,3 +392,14 @@ h3 {
     transform: translateX(-50%);
   }
 }
+
+/* Navbar brand: moon orbiting the logo planet */
+@keyframes nav-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.nav-orbit {
+  animation: nav-orbit 6s linear infinite;
+}

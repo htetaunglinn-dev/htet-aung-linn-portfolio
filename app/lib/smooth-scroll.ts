@@ -14,3 +14,12 @@ export function smoothScrollTo(top: number) {
     window.scrollTo({ top, behavior: 'smooth' });
   }
 }
+
+/** Pauses page scrolling (e.g. while the mobile menu is open). */
+export function setScrollLocked(locked: boolean) {
+  if (lenis) {
+    if (locked) lenis.stop();
+    else lenis.start();
+  }
+  document.documentElement.style.overflow = locked ? 'hidden' : '';
+}

@@ -35,3 +35,16 @@ export function getScrollProgress(
   }
   return Math.min(1, Math.max(0, progress));
 }
+
+export function getSectionTrackProgress(sectionTops: number[], line: number): number {
+  const segments = sectionTops.length - 1;
+  if (segments < 1) return 0;
+  for (let i = segments - 1; i >= 0; i--) {
+    if (sectionTops[i] <= line) {
+      const span = sectionTops[i + 1] - sectionTops[i];
+      const fraction = span > 0 ? Math.min(1, (line - sectionTops[i]) / span) : 1;
+      return (i + fraction) / segments;
+    }
+  }
+  return 0;
+}

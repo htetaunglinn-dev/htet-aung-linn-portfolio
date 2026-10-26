@@ -84,7 +84,7 @@ const workExperience: WorkExperienceItem[] = [
     logo: "https://res.cloudinary.com/htetaunglinn-dev/image/upload/v1739081714/Portfolio%20Next%20JS%202025/logo/2.png",
     position: "Software Engineer",
     period: "June 2023 - January 2024",
-    location: "Yangon, Myanmar",
+    location: "Singapore, Remote",
     description:
       "Delivered high-impact fintech solutions including digital wallet and financial portals. Led cross-functional teams to build secure, scalable applications while optimizing APIs and establishing development best practices across the organization.",
     achievements: [

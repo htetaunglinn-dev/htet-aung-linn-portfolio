@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getScrollProgress, getScrollTarget } from './scroll-utils';
+import { getScrollProgress, getScrollTarget, getSectionTrackProgress } from './scroll-utils';
 
 const NAV_HEIGHT = 72;
 
@@ -49,5 +49,32 @@ describe('getScrollProgress', () => {
   it('returns 0 for zero-height elements instead of NaN', () => {
     expect(getScrollProgress(-10, 0, VH, 'exit')).toBe(0);
     expect(getScrollProgress(-10, 0, VH, 'center')).toBe(0);
+  });
+});
+
+describe('getSectionTrackProgress', () => {
+  const LINE = 400;
+  const UNEVEN_TOPS = [0, 1000, 1200, 4000];
+
+  it('reaches each node exactly when its section top crosses the line', () => {
+    expect(getSectionTrackProgress(UNEVEN_TOPS.map((top) => top + LINE), LINE)).toBe(0);
+    expect(getSectionTrackProgress(UNEVEN_TOPS.map((top) => top - 1000 + LINE), LINE)).toBeCloseTo(1 / 3);
+    expect(getSectionTrackProgress(UNEVEN_TOPS.map((top) => top - 1200 + LINE), LINE)).toBeCloseTo(2 / 3);
+    expect(getSectionTrackProgress(UNEVEN_TOPS.map((top) => top - 4000 + LINE), LINE)).toBe(1);
+  });
+
+  it('interpolates within a section by its own height', () => {
+    expect(getSectionTrackProgress(UNEVEN_TOPS.map((top) => top - 500 + LINE), LINE)).toBeCloseTo(1 / 6);
+    expect(getSectionTrackProgress(UNEVEN_TOPS.map((top) => top - 1100 + LINE), LINE)).toBeCloseTo(1 / 2);
+  });
+
+  it('clamps before the first and after the last section', () => {
+    expect(getSectionTrackProgress(UNEVEN_TOPS.map((top) => top + 100 + LINE), LINE)).toBe(0);
+    expect(getSectionTrackProgress(UNEVEN_TOPS.map((top) => top - 9000 + LINE), LINE)).toBe(1);
+  });
+
+  it('returns 0 when there is no segment to fill', () => {
+    expect(getSectionTrackProgress([], LINE)).toBe(0);
+    expect(getSectionTrackProgress([0], LINE)).toBe(0);
   });
 });
